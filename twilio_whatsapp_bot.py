@@ -1,27 +1,20 @@
 #!/usr/bin/env python3
 """
-Twilio WhatsApp Bot - Integración con Orquesta
+Twilio WhatsApp Bot - Orquesta
+Responde correctamente en TwiML
 """
 
 from flask import Flask, request
-from twilio.rest import Client
 from twilio.twiml.messaging_response import MessagingResponse
 import json
 import os
 from datetime import datetime
 
-# Twilio config
-ACCOUNT_SID = "AC12cce1d5c9cded008d655701fec05052"
-AUTH_TOKEN = "dce81647342347751d3537ae1e20ccbe"
-TWILIO_WHATSAPP_NUMBER = "+447537166676"
-
 # Files
 LEADS_FILE = os.path.expanduser("~/.openclaw/workspace/leads.json")
 CONVERSATIONS_FILE = os.path.expanduser("~/.openclaw/workspace/conversations.json")
 
-# Initialize
 app = Flask(__name__)
-twilio_client = Client(ACCOUNT_SID, AUTH_TOKEN)
 
 def log_msg(msg):
     """Log con timestamp"""
@@ -54,37 +47,26 @@ def save_leads(leads):
     with open(LEADS_FILE, 'w') as f:
         json.dump(leads, f, indent=2)
 
-def send_whatsapp_message(to_number, message):
-    """Envía mensaje por WhatsApp"""
-    try:
-        msg = twilio_client.messages.create(
-            from_=f"whatsapp:{TWILIO_WHATSAPP_NUMBER}",
-            body=message,
-            to=f"whatsapp:{to_number}"
-        )
-        log_msg(f"✉️ Enviado a {to_number}: {message[:50]}...")
-        return True
-    except Exception as e:
-        log_msg(f"❌ Error enviando: {e}")
-        return False
-
-@app.route('/webhook/whatsapp', methods=['POST', 'GET'])
+@app.route('/webhook/whatsapp', methods=['POST'])
 def whatsapp_webhook():
-    """Webhook de Twilio"""
+    """Webhook de Twilio - Responde en TwiML"""
     
-    log_msg(f"📨 Webhook llamado - Método: {request.method}")
+    log_msg("📨 Webhook llamado")
     
     try:
-        # Parsear datos
+        # Parsear mensaje
         incoming_msg = request.values.get('Body', '').strip()
         sender = request.values.get('From', '').replace('whatsapp:', '')
         
         log_msg(f"👤 De: {sender}")
-        log_msg(f"💬 Mensaje: {incoming_msg}")
+        log_msg(f"💬 Mensaje: {incoming_msg[:100]}")
+        
+        # Crear respuesta TwiML
+        resp = MessagingResponse()
         
         if not incoming_msg:
-            log_msg("⚠️  Mensaje vacío, ignorando")
-            return '', 200
+            resp.message("Hola 👋 ¿Cómo puedo ayudarte?")
+            return str(resp)
         
         # Cargar conversaciones
         conversations = load_conversations()
@@ -98,11 +80,11 @@ def whatsapp_webhook():
                 'started_at': datetime.now().isoformat()
             }
             
-            welcome_msg = "🎵 ¡Hola! Bienvenido a Orquesta.\n\nVamos a conocer tu negocio en 3 preguntas rápidas.\n\n¿Cuál es el nombre de tu empresa?"
-            send_whatsapp_message(sender, welcome_msg)
+            msg = "🎵 ¡Hola! Bienvenido a Orquesta.\n\nVamos a conocer tu negocio en 3 preguntas rápidas.\n\n¿Cuál es el nombre de tu empresa?"
+            resp.message(msg)
             save_conversations(conversations)
-            log_msg(f"✅ Mensaje de bienvenida enviado")
-            return '', 200
+            log_msg(f"✅ Respuesta enviada")
+            return str(resp)
         
         conv = conversations[sender]
         step = conv['step']
@@ -112,10 +94,10 @@ def whatsapp_webhook():
             conv['data']['empresa'] = incoming_msg
             conv['step'] = 1
             msg = "¡Perfecto! 📧\n\n¿Qué servicio de Orquesta te interesa?\n\n1️⃣ WhatsApp & CRM\n2️⃣ E-commerce Analytics\n3️⃣ Market Research"
-            send_whatsapp_message(sender, msg)
+            resp.message(msg)
             save_conversations(conversations)
-            log_msg(f"✅ Paso 1 completado: {incoming_msg}")
-            return '', 200
+            log_msg(f"✅ Paso 1: {incoming_msg}")
+            return str(resp)
         
         # Paso 2: Servicio
         elif step == 1:
@@ -127,10 +109,10 @@ def whatsapp_webhook():
             conv['data']['servicio'] = servicios.get(incoming_msg, incoming_msg)
             conv['step'] = 2
             msg = f"¡Excelente! Elegiste: {conv['data']['servicio']} ✨\n\n¿Cuántos empleados tiene tu empresa?"
-            send_whatsapp_message(sender, msg)
+            resp.message(msg)
             save_conversations(conversations)
-            log_msg(f"✅ Paso 2 completado: {conv['data']['servicio']}")
-            return '', 200
+            log_msg(f"✅ Paso 2: {conv['data']['servicio']}")
+            return str(resp)
         
         # Paso 3: Empleados + GUARDAR
         elif step == 2:
@@ -156,20 +138,20 @@ def whatsapp_webhook():
             log_msg(f"💾 Lead guardado: {new_lead['nombre']}")
             
             # Mensaje final
-            final_msg = f"✅ ¡Listo! Recibimos tu información:\n\n📱 {conv['data']['empresa']}\n🎯 {conv['data']['servicio']}\n👥 {conv['data']['empleados']} empleados\n\nNuestro equipo te contactará en las próximas 24h para una consulta sin compromiso.\n\n¿Preguntas? Escribe cuando quieras 💬"
-            send_whatsapp_message(sender, final_msg)
+            final_msg = f"✅ ¡Listo! Recibimos tu información:\n\n📱 {conv['data']['empresa']}\n🎯 {conv['data']['servicio']}\n👥 {conv['data']['empleados']} empleados\n\nNuestro equipo te contactará en las próximas 24h.\n\n¿Preguntas? Escribe cuando quieras 💬"
+            resp.message(final_msg)
             save_conversations(conversations)
             
-            log_msg(f"✅ Lead completo y guardado")
-            return '', 200
+            log_msg(f"✅ Lead completo")
+            return str(resp)
         
-        return '', 200
+        return str(resp)
         
     except Exception as e:
-        log_msg(f"❌ Error en webhook: {e}")
-        import traceback
-        traceback.print_exc()
-        return '', 500
+        log_msg(f"❌ Error: {e}")
+        resp = MessagingResponse()
+        resp.message("Error en el servidor. Intenta más tarde.")
+        return str(resp)
 
 @app.route('/health', methods=['GET'])
 def health():
@@ -177,7 +159,6 @@ def health():
 
 if __name__ == '__main__':
     log_msg("🚀 Twilio WhatsApp Bot iniciado")
-    log_msg(f"📱 Número: {TWILIO_WHATSAPP_NUMBER}")
     log_msg(f"🔗 Webhook: POST /webhook/whatsapp")
     log_msg(f"💾 Leads: {LEADS_FILE}")
     log_msg("Esperando mensajes...")
