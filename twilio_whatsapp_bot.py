@@ -1,10 +1,6 @@
 #!/usr/bin/env python3
 """
 Twilio WhatsApp Bot - Integración con Orquesta
-Recibe mensajes de WhatsApp y automáticamente:
-1. Hace 3 preguntas (empresa, servicio, empleados)
-2. Guarda el lead en leads.json
-3. Sincroniza con HubSpot
 """
 
 from flask import Flask, request
@@ -23,139 +19,166 @@ TWILIO_WHATSAPP_NUMBER = "+447537166676"
 LEADS_FILE = os.path.expanduser("~/.openclaw/workspace/leads.json")
 CONVERSATIONS_FILE = os.path.expanduser("~/.openclaw/workspace/conversations.json")
 
-# Initialize Flask + Twilio
+# Initialize
 app = Flask(__name__)
 twilio_client = Client(ACCOUNT_SID, AUTH_TOKEN)
 
+def log_msg(msg):
+    """Log con timestamp"""
+    ts = datetime.now().isoformat()
+    print(f"[{ts}] {msg}")
+
 def load_conversations():
-    """Carga estado de conversaciones"""
     if os.path.exists(CONVERSATIONS_FILE):
-        with open(CONVERSATIONS_FILE, 'r') as f:
-            return json.load(f)
+        try:
+            with open(CONVERSATIONS_FILE, 'r') as f:
+                return json.load(f)
+        except:
+            return {}
     return {}
 
 def save_conversations(data):
-    """Guarda estado de conversaciones"""
     with open(CONVERSATIONS_FILE, 'w') as f:
         json.dump(data, f, indent=2)
 
 def load_leads():
-    """Carga leads existentes"""
     if os.path.exists(LEADS_FILE):
-        with open(LEADS_FILE, 'r') as f:
-            return json.load(f)
+        try:
+            with open(LEADS_FILE, 'r') as f:
+                return json.load(f)
+        except:
+            return []
     return []
 
 def save_leads(leads):
-    """Guarda leads"""
     with open(LEADS_FILE, 'w') as f:
         json.dump(leads, f, indent=2)
 
 def send_whatsapp_message(to_number, message):
-    """Envía mensaje por WhatsApp vía Twilio"""
+    """Envía mensaje por WhatsApp"""
     try:
         msg = twilio_client.messages.create(
             from_=f"whatsapp:{TWILIO_WHATSAPP_NUMBER}",
             body=message,
             to=f"whatsapp:{to_number}"
         )
+        log_msg(f"✉️ Enviado a {to_number}: {message[:50]}...")
         return True
     except Exception as e:
-        print(f"Error enviando WhatsApp: {e}")
+        log_msg(f"❌ Error enviando: {e}")
         return False
 
-@app.route('/webhook/whatsapp', methods=['POST'])
+@app.route('/webhook/whatsapp', methods=['POST', 'GET'])
 def whatsapp_webhook():
-    """Webhook de Twilio para mensajes de WhatsApp"""
+    """Webhook de Twilio"""
     
-    # Parsear mensaje
-    incoming_msg = request.values.get('Body', '').strip()
-    sender = request.values.get('From', '').replace('whatsapp:', '')
+    log_msg(f"📨 Webhook llamado - Método: {request.method}")
     
-    if not incoming_msg:
-        return '', 200
-    
-    # Cargar conversaciones
-    conversations = load_conversations()
-    
-    # Si no existe conversación, iniciar
-    if sender not in conversations:
-        conversations[sender] = {
-            'step': 0,
-            'data': {},
-            'started_at': datetime.now().isoformat()
-        }
+    try:
+        # Parsear datos
+        incoming_msg = request.values.get('Body', '').strip()
+        sender = request.values.get('From', '').replace('whatsapp:', '')
         
-        # Paso 0: Bienvenida
-        welcome_msg = "🎵 ¡Hola! Bienvenido a Orquesta.\n\nVamos a conocer tu negocio en 3 preguntas rápidas.\n\n¿Cuál es el nombre de tu empresa?"
-        send_whatsapp_message(sender, welcome_msg)
-        save_conversations(conversations)
-        return '', 200
-    
-    conv = conversations[sender]
-    step = conv['step']
-    
-    # Paso 1: Empresa
-    if step == 0:
-        conv['data']['empresa'] = incoming_msg
-        conv['step'] = 1
-        send_whatsapp_message(sender, "¡Perfecto! 📧\n\n¿Qué servicio de Orquesta te interesa?\n\n1️⃣ WhatsApp & CRM\n2️⃣ E-commerce Analytics\n3️⃣ Market Research")
-        save_conversations(conversations)
-        return '', 200
-    
-    # Paso 2: Servicio
-    elif step == 1:
-        servicios = {
-            '1': 'WhatsApp & CRM',
-            '2': 'E-commerce Analytics',
-            '3': 'Market Research'
-        }
-        conv['data']['servicio'] = servicios.get(incoming_msg, incoming_msg)
-        conv['step'] = 2
-        send_whatsapp_message(sender, f"¡Excelente! Elegiste: {conv['data']['servicio']} ✨\n\n¿Cuántos empleados tiene tu empresa?")
-        save_conversations(conversations)
-        return '', 200
-    
-    # Paso 3: Empleados + GUARDAR LEAD
-    elif step == 2:
-        conv['data']['empleados'] = incoming_msg
-        conv['step'] = 3
+        log_msg(f"👤 De: {sender}")
+        log_msg(f"💬 Mensaje: {incoming_msg}")
         
-        # GUARDAR LEAD
-        leads = load_leads()
-        new_lead = {
-            'id': len(leads) + 1,
-            'nombre': conv['data'].get('empresa', 'N/A'),
-            'empresa': conv['data'].get('empresa', 'N/A'),
-            'servicio': conv['data'].get('servicio', 'N/A'),
-            'empleados': conv['data'].get('empleados', 'N/A'),
-            'whatsapp': sender,
-            'status': 'nuevo',
-            'fecha': datetime.now().isoformat(),
-            'canal': 'WhatsApp'
-        }
-        leads.append(new_lead)
-        save_leads(leads)
+        if not incoming_msg:
+            log_msg("⚠️  Mensaje vacío, ignorando")
+            return '', 200
         
-        # Mensaje final
-        final_msg = f"✅ ¡Listo! Recibimos tu información:\n\n📱 {conv['data']['empresa']}\n🎯 {conv['data']['servicio']}\n👥 {conv['data']['empleados']} empleados\n\nNuestro equipo te contactará en las próximas 24h para una consulta sin compromiso.\n\n¿Preguntas? Escribe cuando quieras 💬"
-        send_whatsapp_message(sender, final_msg)
-        save_conversations(conversations)
+        # Cargar conversaciones
+        conversations = load_conversations()
         
-        # Log
-        print(f"✅ Lead guardado: {new_lead['nombre']} ({new_lead['whatsapp']})")
+        # Nueva conversación
+        if sender not in conversations:
+            log_msg(f"🆕 Nueva conversación de {sender}")
+            conversations[sender] = {
+                'step': 0,
+                'data': {},
+                'started_at': datetime.now().isoformat()
+            }
+            
+            welcome_msg = "🎵 ¡Hola! Bienvenido a Orquesta.\n\nVamos a conocer tu negocio en 3 preguntas rápidas.\n\n¿Cuál es el nombre de tu empresa?"
+            send_whatsapp_message(sender, welcome_msg)
+            save_conversations(conversations)
+            log_msg(f"✅ Mensaje de bienvenida enviado")
+            return '', 200
+        
+        conv = conversations[sender]
+        step = conv['step']
+        
+        # Paso 1: Empresa
+        if step == 0:
+            conv['data']['empresa'] = incoming_msg
+            conv['step'] = 1
+            msg = "¡Perfecto! 📧\n\n¿Qué servicio de Orquesta te interesa?\n\n1️⃣ WhatsApp & CRM\n2️⃣ E-commerce Analytics\n3️⃣ Market Research"
+            send_whatsapp_message(sender, msg)
+            save_conversations(conversations)
+            log_msg(f"✅ Paso 1 completado: {incoming_msg}")
+            return '', 200
+        
+        # Paso 2: Servicio
+        elif step == 1:
+            servicios = {
+                '1': 'WhatsApp & CRM',
+                '2': 'E-commerce Analytics',
+                '3': 'Market Research'
+            }
+            conv['data']['servicio'] = servicios.get(incoming_msg, incoming_msg)
+            conv['step'] = 2
+            msg = f"¡Excelente! Elegiste: {conv['data']['servicio']} ✨\n\n¿Cuántos empleados tiene tu empresa?"
+            send_whatsapp_message(sender, msg)
+            save_conversations(conversations)
+            log_msg(f"✅ Paso 2 completado: {conv['data']['servicio']}")
+            return '', 200
+        
+        # Paso 3: Empleados + GUARDAR
+        elif step == 2:
+            conv['data']['empleados'] = incoming_msg
+            conv['step'] = 3
+            
+            # GUARDAR LEAD
+            leads = load_leads()
+            new_lead = {
+                'id': len(leads) + 1,
+                'nombre': conv['data'].get('empresa', 'N/A'),
+                'empresa': conv['data'].get('empresa', 'N/A'),
+                'servicio': conv['data'].get('servicio', 'N/A'),
+                'empleados': conv['data'].get('empleados', 'N/A'),
+                'whatsapp': sender,
+                'status': 'nuevo',
+                'fecha': datetime.now().isoformat(),
+                'canal': 'WhatsApp'
+            }
+            leads.append(new_lead)
+            save_leads(leads)
+            
+            log_msg(f"💾 Lead guardado: {new_lead['nombre']}")
+            
+            # Mensaje final
+            final_msg = f"✅ ¡Listo! Recibimos tu información:\n\n📱 {conv['data']['empresa']}\n🎯 {conv['data']['servicio']}\n👥 {conv['data']['empleados']} empleados\n\nNuestro equipo te contactará en las próximas 24h para una consulta sin compromiso.\n\n¿Preguntas? Escribe cuando quieras 💬"
+            send_whatsapp_message(sender, final_msg)
+            save_conversations(conversations)
+            
+            log_msg(f"✅ Lead completo y guardado")
+            return '', 200
         
         return '', 200
-    
-    return '', 200
+        
+    except Exception as e:
+        log_msg(f"❌ Error en webhook: {e}")
+        import traceback
+        traceback.print_exc()
+        return '', 500
 
 @app.route('/health', methods=['GET'])
 def health():
-    """Health check"""
     return {'status': 'ok'}, 200
 
 if __name__ == '__main__':
-    print("🚀 Twilio WhatsApp Bot iniciado...")
-    print(f"📱 Número WhatsApp: {TWILIO_WHATSAPP_NUMBER}")
-    print(f"🔗 Webhook: POST /webhook/whatsapp")
+    log_msg("🚀 Twilio WhatsApp Bot iniciado")
+    log_msg(f"📱 Número: {TWILIO_WHATSAPP_NUMBER}")
+    log_msg(f"🔗 Webhook: POST /webhook/whatsapp")
+    log_msg(f"💾 Leads: {LEADS_FILE}")
+    log_msg("Esperando mensajes...")
     app.run(host='0.0.0.0', port=5000, debug=False)
