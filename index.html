@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ORQUESTA — Automatiza tus operaciones con IA</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <title>ORQUESTA — AI Automation for Modern Business</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -13,11 +13,12 @@
         }
 
         :root {
-            --gold: #c9a84c;
-            --black: #0a0a0a;
-            --dark-gray: #1a1a18;
-            --light: #f5f2ec;
-            --text-gray: #888880;
+            --primary: #c9a84c;
+            --dark: #0a0a0a;
+            --dark-lighter: #1a1a1a;
+            --light: #ffffff;
+            --text-secondary: #888888;
+            --accent: #c9a84c;
         }
 
         html {
@@ -25,11 +26,59 @@
         }
 
         body {
-            background: var(--black);
+            background: var(--dark);
             color: var(--light);
-            font-family: 'DM Sans', sans-serif;
+            font-family: 'Inter', sans-serif;
             line-height: 1.6;
             overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle 800px at 20% 50%, rgba(201, 168, 76, 0.15) 0%, transparent 50%),
+                radial-gradient(circle 600px at 80% 80%, rgba(201, 168, 76, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+            animation: shift 8s ease-in-out infinite;
+        }
+
+        @keyframes shift {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(50px, 50px); }
+        }
+
+        /* Starfield effect */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .star {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.1; }
+            50% { opacity: 0.8; }
         }
 
         /* Navigation */
@@ -43,17 +92,16 @@
             justify-content: space-between;
             align-items: center;
             padding: 24px 60px;
-            background: rgba(10, 10, 10, 0.95);
+            background: rgba(10, 10, 10, 0.8);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid rgba(201, 168, 76, 0.1);
         }
 
         .logo {
-            font-family: 'Cormorant Garamond', serif;
             font-size: 24px;
             font-weight: 700;
-            letter-spacing: 2px;
-            color: var(--gold);
+            letter-spacing: 3px;
+            color: var(--primary);
             text-transform: uppercase;
         }
 
@@ -65,93 +113,75 @@
         }
 
         nav a {
-            color: var(--text-gray);
+            color: var(--text-secondary);
             text-decoration: none;
-            font-size: 12px;
+            font-size: 13px;
             letter-spacing: 1px;
             text-transform: uppercase;
-            transition: color 0.3s ease;
-            position: relative;
+            transition: color 0.3s;
         }
 
         nav a:hover {
-            color: var(--gold);
+            color: var(--primary);
         }
 
-        nav a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--gold);
-            transition: width 0.3s ease;
-        }
-
-        nav a:hover::after {
-            width: 100%;
-        }
-
-        .cta-btn {
-            background: var(--gold);
-            color: var(--black);
-            padding: 12px 32px;
-            border: none;
+        .nav-btn {
+            background: rgba(201, 168, 76, 0.2);
+            color: var(--primary);
+            padding: 10px 24px;
+            border: 1px solid var(--primary);
             border-radius: 4px;
             font-size: 12px;
             font-weight: 600;
             letter-spacing: 1px;
-            cursor: pointer;
-            transition: all 0.3s ease;
             text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s;
         }
 
-        .cta-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 20px 40px rgba(201, 168, 76, 0.3);
+        .nav-btn:hover {
+            background: var(--primary);
+            color: var(--dark);
+            box-shadow: 0 0 20px rgba(201, 168, 76, 0.4);
+        }
+
+        /* Main content */
+        main {
+            position: relative;
+            z-index: 2;
         }
 
         /* Hero Section */
         .hero {
             min-height: 100vh;
             display: flex;
-            align-items: center;
+            flex-direction: column;
             justify-content: center;
-            padding: 120px 60px;
+            align-items: center;
+            text-align: center;
+            padding: 120px 60px 60px;
             position: relative;
-            overflow: hidden;
         }
 
-        .hero::before {
-            content: '';
-            position: absolute;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(201, 168, 76, 0.15) 0%, transparent 70%);
-            border-radius: 50%;
-            top: 50%;
-            right: -100px;
-            transform: translateY(-50%);
-            animation: float 6s ease-in-out infinite;
+        .hero-badge {
+            display: inline-block;
+            background: rgba(201, 168, 76, 0.1);
+            border: 1px solid rgba(201, 168, 76, 0.3);
+            color: var(--primary);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+            animation: fadeInDown 0.8s ease-out;
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(-50%) translateX(0); }
-            50% { transform: translateY(-50%) translateX(30px); }
-        }
-
-        .hero-content {
-            max-width: 700px;
-            position: relative;
-            z-index: 10;
-            animation: slideUp 1s ease-out;
-        }
-
-        @keyframes slideUp {
+        @keyframes fadeInDown {
             from {
                 opacity: 0;
-                transform: translateY(40px);
+                transform: translateY(-20px);
             }
             to {
                 opacity: 1;
@@ -160,92 +190,27 @@
         }
 
         .hero h1 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(48px, 8vw, 96px);
-            font-weight: 300;
+            font-size: clamp(48px, 8vw, 84px);
+            font-weight: 700;
             line-height: 1.1;
             margin-bottom: 30px;
+            max-width: 1000px;
+            animation: fadeInUp 1s ease-out;
             letter-spacing: -1px;
         }
 
         .hero h1 em {
+            background: linear-gradient(135deg, var(--primary), rgba(201, 168, 76, 0.6));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             font-style: italic;
-            color: var(--gold);
-        }
-
-        .hero p {
-            font-size: 16px;
-            color: var(--text-gray);
-            max-width: 500px;
-            margin-bottom: 40px;
-            line-height: 1.8;
-        }
-
-        .hero-actions {
-            display: flex;
-            gap: 20px;
-            align-items: center;
-        }
-
-        .primary-btn {
-            background: var(--gold);
-            color: var(--black);
-            padding: 16px 40px;
-            border: none;
-            border-radius: 4px;
-            font-size: 12px;
-            font-weight: 600;
-            letter-spacing: 1px;
-            cursor: pointer;
-            text-transform: uppercase;
-            transition: all 0.3s ease;
-        }
-
-        .primary-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 25px 50px rgba(201, 168, 76, 0.4);
-        }
-
-        .secondary-btn {
-            background: transparent;
-            color: var(--text-gray);
-            padding: 16px 40px;
-            border: 1px solid rgba(201, 168, 76, 0.3);
-            border-radius: 4px;
-            font-size: 12px;
-            font-weight: 600;
-            letter-spacing: 1px;
-            cursor: pointer;
-            text-transform: uppercase;
-            transition: all 0.3s ease;
-        }
-
-        .secondary-btn:hover {
-            border-color: var(--gold);
-            color: var(--gold);
-            background: rgba(201, 168, 76, 0.1);
-        }
-
-        /* Stats Section */
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1px;
-            background: rgba(201, 168, 76, 0.1);
-            margin: 60px 0;
-        }
-
-        .stat {
-            background: var(--black);
-            padding: 40px;
-            text-align: center;
-            animation: fadeInUp 0.8s ease-out backwards;
         }
 
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(20px);
             }
             to {
                 opacity: 1;
@@ -253,70 +218,167 @@
             }
         }
 
-        .stat:nth-child(1) { animation-delay: 0.1s; }
-        .stat:nth-child(2) { animation-delay: 0.2s; }
-        .stat:nth-child(3) { animation-delay: 0.3s; }
-        .stat:nth-child(4) { animation-delay: 0.4s; }
+        .hero-subtitle {
+            font-size: 18px;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 50px;
+            line-height: 1.7;
+            animation: fadeInUp 1s ease-out 0.2s backwards;
+        }
 
-        .stat-number {
-            font-family: 'Cormorant Garamond', serif;
+        .hero-cta {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            animation: fadeInUp 1s ease-out 0.4s backwards;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: var(--dark);
+            padding: 16px 40px;
+            border: none;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 0 30px rgba(201, 168, 76, 0.2);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px rgba(201, 168, 76, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--light);
+            padding: 16px 40px;
+            border: 1px solid rgba(201, 168, 76, 0.5);
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: rgba(201, 168, 76, 0.05);
+        }
+
+        /* Glow effect on hero */
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(201, 168, 76, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            filter: blur(80px);
+            z-index: -1;
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+            50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.8; }
+        }
+
+        /* Stats Section */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1px;
+            background: rgba(201, 168, 76, 0.05);
+            padding: 0;
+            margin: 80px 60px;
+            border: 1px solid rgba(201, 168, 76, 0.1);
+        }
+
+        .stat {
+            background: var(--dark);
+            padding: 50px 30px;
+            text-align: center;
+            border-right: 1px solid rgba(201, 168, 76, 0.1);
+        }
+
+        .stat:last-child {
+            border-right: none;
+        }
+
+        .stat-value {
             font-size: 48px;
             font-weight: 700;
-            color: var(--gold);
+            color: var(--primary);
             margin-bottom: 10px;
         }
 
         .stat-label {
-            font-size: 11px;
+            font-size: 12px;
             letter-spacing: 1px;
             text-transform: uppercase;
-            color: var(--text-gray);
+            color: var(--text-secondary);
         }
 
-        /* Sections */
+        /* Section */
         section {
             padding: 120px 60px;
             max-width: 1400px;
             margin: 0 auto;
+            position: relative;
+            z-index: 2;
         }
 
         section h2 {
-            font-family: 'Cormorant Garamond', serif;
             font-size: clamp(36px, 5vw, 64px);
-            font-weight: 300;
+            font-weight: 700;
             margin-bottom: 20px;
             line-height: 1.1;
+            letter-spacing: -1px;
         }
 
         section h2 em {
+            background: linear-gradient(135deg, var(--primary), rgba(201, 168, 76, 0.6));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             font-style: italic;
-            color: var(--gold);
         }
 
         .section-intro {
-            font-size: 15px;
-            color: var(--text-gray);
+            font-size: 16px;
+            color: var(--text-secondary);
             max-width: 600px;
             margin-bottom: 80px;
-            line-height: 1.8;
+            line-height: 1.7;
         }
 
-        /* Services */
+        /* Services Grid */
         .services-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 1px;
-            background: rgba(201, 168, 76, 0.1);
-            margin-top: 60px;
+            gap: 30px;
         }
 
         .service-card {
-            background: var(--black);
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(201, 168, 76, 0.1);
             padding: 50px 40px;
-            transition: all 0.4s ease;
+            border-radius: 8px;
+            transition: all 0.3s;
             position: relative;
             overflow: hidden;
-            cursor: pointer;
         }
 
         .service-card::before {
@@ -324,65 +386,69 @@
             position: absolute;
             top: 0;
             left: 0;
-            right: 0;
-            height: 3px;
-            background: var(--gold);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.4s ease;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(201, 168, 76, 0.1) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 0;
         }
 
         .service-card:hover {
-            background: var(--dark-gray);
+            border-color: var(--primary);
+            background: rgba(201, 168, 76, 0.05);
+            transform: translateY(-5px);
         }
 
         .service-card:hover::before {
-            transform: scaleX(1);
+            opacity: 1;
         }
 
-        .service-card h3 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 24px;
-            margin-bottom: 15px;
-            margin-top: 20px;
+        .service-card > * {
+            position: relative;
+            z-index: 1;
         }
 
         .service-icon {
-            font-size: 32px;
-            display: block;
+            font-size: 36px;
             margin-bottom: 20px;
         }
 
+        .service-card h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--light);
+        }
+
         .service-card p {
-            font-size: 13px;
-            color: var(--text-gray);
-            line-height: 1.8;
-            margin-bottom: 25px;
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 30px;
         }
 
         .service-features {
             list-style: none;
-            font-size: 12px;
-            color: #666;
+            font-size: 13px;
+            color: var(--text-secondary);
         }
 
         .service-features li {
             padding: 8px 0;
-            border-bottom: 1px solid rgba(201, 168, 76, 0.1);
-            padding-left: 20px;
-            position: relative;
+            display: flex;
+            gap: 10px;
         }
 
         .service-features li::before {
-            content: '—';
-            position: absolute;
-            left: 0;
-            color: var(--gold);
+            content: '→';
+            color: var(--primary);
+            flex-shrink: 0;
         }
 
-        /* How It Works */
+        /* How Section */
         .how-section {
-            background: linear-gradient(135deg, var(--dark-gray) 0%, var(--black) 100%);
+            background: rgba(201, 168, 76, 0.03);
         }
 
         .steps-grid {
@@ -394,229 +460,165 @@
 
         .step {
             text-align: center;
-            animation: fadeInUp 0.8s ease-out backwards;
         }
-
-        .step:nth-child(1) { animation-delay: 0.1s; }
-        .step:nth-child(2) { animation-delay: 0.2s; }
-        .step:nth-child(3) { animation-delay: 0.3s; }
-        .step:nth-child(4) { animation-delay: 0.4s; }
 
         .step-number {
             width: 60px;
             height: 60px;
-            border: 2px solid var(--gold);
+            border: 2px solid rgba(201, 168, 76, 0.3);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 20px;
-            font-family: 'Cormorant Garamond', serif;
             font-size: 24px;
-            color: var(--gold);
             font-weight: 700;
-            transition: all 0.3s ease;
+            color: var(--primary);
+            transition: all 0.3s;
         }
 
         .step:hover .step-number {
-            background: var(--gold);
-            color: var(--black);
+            border-color: var(--primary);
+            background: rgba(201, 168, 76, 0.1);
         }
 
         .step h3 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 20px;
+            font-size: 18px;
+            font-weight: 700;
             margin: 20px 0;
         }
 
         .step p {
             font-size: 13px;
-            color: var(--text-gray);
+            color: var(--text-secondary);
             line-height: 1.7;
         }
 
-        /* Team */
+        /* Team Section */
         .team-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 1px;
-            background: rgba(201, 168, 76, 0.1);
+            gap: 40px;
             margin-top: 60px;
         }
 
-        .team-member {
-            background: var(--black);
+        .team-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(201, 168, 76, 0.1);
             padding: 50px 40px;
+            border-radius: 8px;
             text-align: center;
-            transition: all 0.4s ease;
-            position: relative;
+            transition: all 0.3s;
         }
 
-        .team-member::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: var(--gold);
-            transform: scaleX(0);
-            transition: transform 0.4s ease;
-        }
-
-        .team-member:hover {
-            background: var(--dark-gray);
-        }
-
-        .team-member:hover::after {
-            transform: scaleX(1);
+        .team-card:hover {
+            border-color: var(--primary);
+            background: rgba(201, 168, 76, 0.05);
         }
 
         .avatar {
             width: 80px;
             height: 80px;
             border-radius: 50%;
-            background: linear-gradient(135deg, rgba(201, 168, 76, 0.3), rgba(201, 168, 76, 0.1));
-            border: 2px solid var(--gold);
+            background: rgba(201, 168, 76, 0.1);
+            border: 2px solid var(--primary);
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 20px;
-            font-family: 'Cormorant Garamond', serif;
             font-size: 28px;
             font-weight: 700;
-            color: var(--gold);
+            color: var(--primary);
         }
 
-        .team-member h3 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 22px;
+        .team-card h3 {
+            font-size: 20px;
+            font-weight: 700;
             margin-bottom: 5px;
         }
 
-        .role {
-            font-size: 11px;
+        .team-role {
+            font-size: 12px;
             letter-spacing: 1px;
             text-transform: uppercase;
-            color: var(--gold);
-            margin-bottom: 15px;
+            color: var(--primary);
+            margin-bottom: 20px;
         }
 
-        .team-member p {
+        .team-card p {
             font-size: 13px;
-            color: var(--text-gray);
+            color: var(--text-secondary);
             line-height: 1.7;
         }
 
         /* CTA Section */
         .cta-section {
+            background: rgba(201, 168, 76, 0.03);
             text-align: center;
-            padding: 100px 60px;
-            background: linear-gradient(135deg, var(--dark-gray) 0%, var(--black) 100%);
+            padding: 120px 60px;
             position: relative;
-            overflow: hidden;
-        }
-
-        .cta-section::before {
-            content: '';
-            position: absolute;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(201, 168, 76, 0.1) 0%, transparent 70%);
-            border-radius: 50%;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
         }
 
         .cta-section h2 {
-            position: relative;
-            z-index: 10;
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto 30px;
         }
 
         .cta-section p {
-            font-size: 15px;
-            color: var(--text-gray);
-            max-width: 600px;
+            font-size: 16px;
+            color: var(--text-secondary);
+            max-width: 700px;
             margin: 0 auto 50px;
-            position: relative;
-            z-index: 10;
         }
 
         .cta-buttons {
             display: flex;
             gap: 20px;
             justify-content: center;
-            position: relative;
-            z-index: 10;
         }
 
         /* Footer */
         footer {
-            background: #000;
+            background: var(--dark-lighter);
             border-top: 1px solid rgba(201, 168, 76, 0.1);
-            padding: 50px 60px;
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 40px;
-            align-items: start;
-        }
-
-        footer h3 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 18px;
-            margin-bottom: 15px;
-            color: var(--gold);
+            padding: 60px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
         }
 
         footer p {
-            font-size: 12px;
-            color: var(--text-gray);
-            line-height: 1.8;
-        }
-
-        footer ul {
-            list-style: none;
-        }
-
-        footer li {
-            margin-bottom: 10px;
-        }
-
-        footer a {
-            color: var(--text-gray);
-            text-decoration: none;
-            font-size: 12px;
-            transition: color 0.3s ease;
-        }
-
-        footer a:hover {
-            color: var(--gold);
-        }
-
-        .footer-copy {
-            grid-column: 1 / -1;
-            text-align: center;
-            border-top: 1px solid rgba(201, 168, 76, 0.1);
-            padding-top: 20px;
-            color: #444;
-            font-size: 11px;
+            font-size: 13px;
+            color: var(--text-secondary);
+            letter-spacing: 1px;
         }
 
         /* Responsive */
-        @media (max-width: 768px) {
+        @media (max-width: 1024px) {
             nav {
-                padding: 16px 24px;
+                padding: 16px 30px;
             }
 
             nav ul {
-                display: none;
+                gap: 30px;
+            }
+
+            .hero {
+                padding: 100px 30px 50px;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+                margin: 60px 30px;
             }
 
             section {
-                padding: 60px 24px;
+                padding: 80px 30px;
             }
 
             .services-grid,
@@ -626,204 +628,211 @@
 
             .steps-grid {
                 grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 640px) {
+            nav {
+                flex-direction: column;
                 gap: 20px;
+                padding: 16px;
             }
 
-            .cta-buttons {
+            nav ul {
+                gap: 15px;
                 flex-direction: column;
             }
 
-            footer {
-                grid-template-columns: 1fr;
-                gap: 30px;
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .btn-primary, .btn-secondary {
+                padding: 12px 24px;
+                font-size: 11px;
             }
 
             .stats {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: 1fr;
+            }
+
+            .steps-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
+    <div class="stars" id="stars"></div>
+
     <nav>
-        <div class="logo">ORQUESTA</div>
+        <div class="logo">◆ ORQUESTA</div>
         <ul>
-            <li><a href="#servicios">Servicios</a></li>
-            <li><a href="#metodo">Método</a></li>
-            <li><a href="#equipo">Equipo</a></li>
-            <li><a href="#contacto"><button class="cta-btn">Contactar</button></a></li>
+            <li><a href="#servicios">Services</a></li>
+            <li><a href="#metodo">Method</a></li>
+            <li><a href="#equipo">Team</a></li>
+            <li><button class="nav-btn">Get In Touch →</button></li>
         </ul>
     </nav>
 
-    <!-- Hero -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Tus procesos,<br><em>en armonía</em></h1>
-            <p>Automatizamos las operaciones de tu negocio con agentes de inteligencia artificial. Más ventas, menos tiempo perdido, decisiones basadas en datos reales.</p>
-            <div class="hero-actions">
-                <button class="primary-btn">Empezar ahora</button>
-                <button class="secondary-btn">Ver más</button>
+    <main>
+        <section class="hero">
+            <span class="hero-badge">New Era of Business</span>
+            <h1>Intelligent Automation<br>for <em>Modern Businesses.</em></h1>
+            <p class="hero-subtitle">Orquesta brings AI automation to your operations. Streamline workflows, amplify sales, and make decisions based on real data.</p>
+            <div class="hero-cta">
+                <button class="btn-primary">Get In Touch →</button>
+                <button class="btn-secondary">View Services</button>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Stats -->
-    <div style="padding: 0 60px; max-width: 1400px; margin: 0 auto;">
         <div class="stats">
             <div class="stat">
-                <div class="stat-number">80%</div>
-                <div class="stat-label">Reducción en tiempos</div>
+                <div class="stat-value">80%</div>
+                <div class="stat-label">Time Reduction</div>
             </div>
             <div class="stat">
-                <div class="stat-number">3×</div>
-                <div class="stat-label">Más leads calificados</div>
+                <div class="stat-value">3×</div>
+                <div class="stat-label">More Qualified Leads</div>
             </div>
             <div class="stat">
-                <div class="stat-number">48h</div>
-                <div class="stat-label">Hasta implementación</div>
+                <div class="stat-value">48h</div>
+                <div class="stat-label">To Implementation</div>
             </div>
             <div class="stat">
-                <div class="stat-number">100%</div>
-                <div class="stat-label">ROI medible</div>
+                <div class="stat-value">100%</div>
+                <div class="stat-label">Measurable ROI</div>
             </div>
         </div>
-    </div>
 
-    <!-- Services -->
-    <section id="servicios">
-        <h2>Nuestros <em>servicios</em></h2>
-        <p class="section-intro">Combinamos agentes de IA para automatizar cada aspecto de tu negocio. Desde atención al cliente hasta análisis de datos.</p>
-        
-        <div class="services-grid">
-            <div class="service-card">
-                <div class="service-icon">💬</div>
-                <h3>WhatsApp & CRM</h3>
-                <p>Tu agente responde, califica y registra cada cliente automáticamente. 24/7 sin descanso.</p>
-                <ul class="service-features">
-                    <li>Atención 24/7</li>
-                    <li>Calificación automática</li>
-                    <li>HubSpot Pipedrive</li>
-                    <li>Alertas inteligentes</li>
-                </ul>
+        <section id="servicios">
+            <h2>Our <em>Services</em></h2>
+            <p class="section-intro">Combine the right agents to make your business hum like a well-conducted orchestra.</p>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">💬</div>
+                    <h3>WhatsApp & CRM</h3>
+                    <p>Your agent responds, qualifies, and registers every client in real-time. 24/7 without breaking a sweat.</p>
+                    <ul class="service-features">
+                        <li>Automatic 24/7 attention</li>
+                        <li>Intelligent qualification</li>
+                        <li>HubSpot & Pipedrive sync</li>
+                        <li>Smart alerts</li>
+                    </ul>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📊</div>
+                    <h3>E-commerce Analytics</h3>
+                    <p>Turn data into decisions. No manual interpretation. Pure AI insights that move your needle.</p>
+                    <ul class="service-features">
+                        <li>Pixel audit</li>
+                        <li>Abandonment analysis</li>
+                        <li>Campaign optimization</li>
+                        <li>AI reports</li>
+                    </ul>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🎯</div>
+                    <h3>Market Research</h3>
+                    <p>Statistical rigor meets AI insight. Decisions backed by evidence, not hunches.</p>
+                    <ul class="service-features">
+                        <li>Statistical sampling</li>
+                        <li>INDEC weighting</li>
+                        <li>Advanced analysis</li>
+                        <li>Strategic insight</li>
+                    </ul>
+                </div>
             </div>
-            <div class="service-card">
-                <div class="service-icon">📊</div>
-                <h3>E-commerce Analytics</h3>
-                <p>Convierte datos en decisiones. Análisis automático de tu tienda, sin interpretaciones manuales.</p>
-                <ul class="service-features">
-                    <li>Auditoría de píxeles</li>
-                    <li>Análisis de abandono</li>
-                    <li>Optimización Meta/Google</li>
-                    <li>Reportes IA</li>
-                </ul>
-            </div>
-            <div class="service-card">
-                <div class="service-icon">🎯</div>
-                <h3>Market Research</h3>
-                <p>Investigación de mercado con rigor estadístico e insights generados por IA. Decisiones basadas en evidencia.</p>
-                <ul class="service-features">
-                    <li>Muestreo estadístico</li>
-                    <li>Ponderación INDEC</li>
-                    <li>Segmentación avanzada</li>
-                    <li>Insights estratégicos</li>
-                </ul>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- How It Works -->
-    <section class="how-section" id="metodo">
-        <h2>Del caos a la <em>armonía</em></h2>
-        <p class="section-intro">Nuestro proceso de 4 pasos convierte tus operaciones manuales en sistemas que trabajan solos.</p>
-        
-        <div class="steps-grid">
-            <div class="step">
-                <div class="step-number">I</div>
-                <h3>Diagnóstico</h3>
-                <p>Analizamos tus procesos e identificamos oportunidades de automatización de impacto máximo.</p>
+        <section class="how-section" id="metodo">
+            <h2>From Chaos to <em>Harmony.</em></h2>
+            <p class="section-intro">Our 4-step process turns manual operations into self-running systems.</p>
+            
+            <div class="steps-grid">
+                <div class="step">
+                    <div class="step-number">I</div>
+                    <h3>Diagnosis</h3>
+                    <p>We analyze your ops and find where automation hits hardest.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">II</div>
+                    <h3>Design</h3>
+                    <p>We build the agent orchestra specific to your goals.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">III</div>
+                    <h3>Implement</h3>
+                    <p>We deploy and integrate everything in under 48 hours.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">IV</div>
+                    <h3>Measure</h3>
+                    <p>We monitor, optimize, and maximize your impact continuously.</p>
+                </div>
             </div>
-            <div class="step">
-                <div class="step-number">II</div>
-                <h3>Diseño</h3>
-                <p>Diseñamos la orquesta de agentes específica para tus objetivos de negocio.</p>
-            </div>
-            <div class="step">
-                <div class="step-number">III</div>
-                <h3>Implementación</h3>
-                <p>Desplegamos e integramos los agentes con tus canales en menos de 48 horas.</p>
-            </div>
-            <div class="step">
-                <div class="step-number">IV</div>
-                <h3>Medición</h3>
-                <p>Monitoreamos resultados y afinamos continuamente para maximizar impacto.</p>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Team -->
-    <section id="equipo">
-        <h2>Las personas detrás de la <em>batuta</em></h2>
-        <p class="section-intro">Tres fundadores con experiencia real en tecnología, negocios y estrategia de crecimiento.</p>
-        
-        <div class="team-grid">
-            <div class="team-member">
-                <div class="avatar">IC</div>
-                <h3>Ignacio Carrere</h3>
-                <p class="role">CEO & Co-Founder</p>
-                <p>Lidera operaciones y estrategia. Experto en automatización de procesos complejos.</p>
+        <section id="equipo">
+            <h2>The People Behind<br>the <em>Baton.</em></h2>
+            <p class="section-intro">Three founders with real experience in tech, business, and growth strategy.</p>
+            
+            <div class="team-grid">
+                <div class="team-card">
+                    <div class="avatar">IC</div>
+                    <h3>Ignacio Carrere</h3>
+                    <p class="team-role">CEO & Co-Founder</p>
+                    <p>Leads operations and strategy. Expert in automating complex processes at scale.</p>
+                </div>
+                <div class="team-card">
+                    <div class="avatar">JA</div>
+                    <h3>Juan Adaro</h3>
+                    <p class="team-role">CTO & Co-Founder</p>
+                    <p>AI architect. Designs the agent infrastructure that makes it all possible.</p>
+                </div>
+                <div class="team-card">
+                    <div class="avatar">TY</div>
+                    <h3>Tomás Yuste</h3>
+                    <p class="team-role">CGO & Co-Founder</p>
+                    <p>Growth strategy expert. Connects solutions to businesses that need them.</p>
+                </div>
             </div>
-            <div class="team-member">
-                <div class="avatar">JA</div>
-                <h3>Juan Adaro</h3>
-                <p class="role">CTO & Co-Founder</p>
-                <p>Arquitecto de IA. Diseña la infraestructura de agentes que hace posible todo.</p>
-            </div>
-            <div class="team-member">
-                <div class="avatar">TY</div>
-                <h3>Tomás Yuste</h3>
-                <p class="role">CGO & Co-Founder</p>
-                <p>Estrategia de crecimiento. Conecta soluciones con empresas que las necesitan.</p>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- CTA -->
-    <section class="cta-section" id="contacto">
-        <h2>¿Listo para que tu negocio suene como una <em>orquesta</em>?</h2>
-        <p>Primera consulta gratis. Diagnóstico en 48 horas. Sin compromisos.</p>
-        <div class="cta-buttons">
-            <button class="primary-btn">Agendar llamada</button>
-            <button class="secondary-btn">Enviar email</button>
-        </div>
-    </section>
+        <section class="cta-section">
+            <h2>Ready for your business<br>to sound like an <em>orchestra?</em></h2>
+            <p>Free consultation. Diagnosis in 48 hours. No commitment.</p>
+            <div class="cta-buttons">
+                <button class="btn-primary">Schedule Call →</button>
+                <button class="btn-secondary">Learn More</button>
+            </div>
+        </section>
+    </main>
 
-    <!-- Footer -->
     <footer>
-        <div>
-            <h3>ORQUESTA</h3>
-            <p>Tus procesos, en armonía. Automatizamos operaciones con IA que genera resultados reales.</p>
-        </div>
-        <div>
-            <h3>Navegación</h3>
-            <ul>
-                <li><a href="#servicios">Servicios</a></li>
-                <li><a href="#metodo">Método</a></li>
-                <li><a href="#equipo">Equipo</a></li>
-                <li><a href="#contacto">Contacto</a></li>
-            </ul>
-        </div>
-        <div>
-            <h3>Contacto</h3>
-            <p>📧 hola@orquesta.ai</p>
-            <p>📱 +54 9 11 0000-0000</p>
-            <p>🌐 orquesta.ai</p>
-        </div>
-        <div class="footer-copy">© 2026 ORQUESTA. Todos los derechos reservados.</div>
+        <p>© 2026 ORQUESTA. All rights reserved. · hola@orquesta.ai · +54 9 11 0000-0000</p>
     </footer>
 
     <script>
-        // Smooth scrolling
+        // Generate random stars
+        function generateStars() {
+            const starsContainer = document.getElementById('stars');
+            const starCount = 100;
+            
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+        
+        generateStars();
+
+        // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -832,25 +841,6 @@
                     target.scrollIntoView({ behavior: 'smooth' });
                 }
             });
-        });
-
-        // Intersection Observer para animaciones
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver(function(entries) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.service-card, .step, .team-member').forEach(el => {
-            el.style.opacity = '0.3';
-            observer.observe(el);
         });
     </script>
 </body>
