@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ORQUESTA — AI Automation for Modern Business</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>ORQUESTA — AI Automation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -12,73 +12,15 @@
             box-sizing: border-box;
         }
 
-        :root {
-            --primary: #c9a84c;
-            --dark: #0a0a0a;
-            --dark-lighter: #1a1a1a;
-            --light: #ffffff;
-            --text-secondary: #888888;
-            --accent: #c9a84c;
-        }
-
         html {
             scroll-behavior: smooth;
         }
 
         body {
-            background: var(--dark);
-            color: var(--light);
+            background: #ffffff;
+            color: #0a0a0a;
             font-family: 'Inter', sans-serif;
             line-height: 1.6;
-            overflow-x: hidden;
-            position: relative;
-        }
-
-        /* Animated background */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle 800px at 20% 50%, rgba(201, 168, 76, 0.15) 0%, transparent 50%),
-                radial-gradient(circle 600px at 80% 80%, rgba(201, 168, 76, 0.1) 0%, transparent 50%);
-            pointer-events: none;
-            z-index: 0;
-            animation: shift 8s ease-in-out infinite;
-        }
-
-        @keyframes shift {
-            0%, 100% { transform: translate(0, 0); }
-            50% { transform: translate(50px, 50px); }
-        }
-
-        /* Starfield effect */
-        .stars {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .star {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            background: white;
-            border-radius: 50%;
-            opacity: 0.3;
-            animation: twinkle 3s infinite;
-        }
-
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.1; }
-            50% { opacity: 0.8; }
         }
 
         /* Navigation */
@@ -91,17 +33,20 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 24px 60px;
-            background: rgba(10, 10, 10, 0.8);
+            padding: 20px 60px;
+            background: rgba(255, 255, 255, 0.8);
             backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(201, 168, 76, 0.1);
+            border-bottom: 1px solid #f0f0f0;
         }
 
         .logo {
-            font-size: 24px;
-            font-weight: 700;
-            letter-spacing: 3px;
-            color: var(--primary);
+            font-size: 20px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, #8B5CF6, #6366F1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             text-transform: uppercase;
         }
 
@@ -113,45 +58,35 @@
         }
 
         nav a {
-            color: var(--text-secondary);
+            color: #666;
             text-decoration: none;
-            font-size: 13px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
+            font-size: 14px;
+            font-weight: 500;
             transition: color 0.3s;
         }
 
         nav a:hover {
-            color: var(--primary);
+            color: #0a0a0a;
         }
 
         .nav-btn {
-            background: rgba(201, 168, 76, 0.2);
-            color: var(--primary);
+            background: linear-gradient(135deg, #8B5CF6, #6366F1);
+            color: white;
             padding: 10px 24px;
-            border: 1px solid var(--primary);
-            border-radius: 4px;
-            font-size: 12px;
+            border: none;
+            border-radius: 6px;
+            font-size: 13px;
             font-weight: 600;
-            letter-spacing: 1px;
-            text-transform: uppercase;
             cursor: pointer;
             transition: all 0.3s;
         }
 
         .nav-btn:hover {
-            background: var(--primary);
-            color: var(--dark);
-            box-shadow: 0 0 20px rgba(201, 168, 76, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(139, 92, 246, 0.3);
         }
 
-        /* Main content */
-        main {
-            position: relative;
-            z-index: 2;
-        }
-
-        /* Hero Section */
+        /* Hero */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -163,154 +98,86 @@
             position: relative;
         }
 
-        .hero-badge {
-            display: inline-block;
-            background: rgba(201, 168, 76, 0.1);
-            border: 1px solid rgba(201, 168, 76, 0.3);
-            color: var(--primary);
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            margin-bottom: 30px;
-            animation: fadeInDown 0.8s ease-out;
-        }
-
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
         .hero h1 {
             font-size: clamp(48px, 8vw, 84px);
-            font-weight: 700;
+            font-weight: 800;
             line-height: 1.1;
-            margin-bottom: 30px;
+            margin-bottom: 24px;
+            letter-spacing: -2px;
             max-width: 1000px;
-            animation: fadeInUp 1s ease-out;
-            letter-spacing: -1px;
         }
 
         .hero h1 em {
-            background: linear-gradient(135deg, var(--primary), rgba(201, 168, 76, 0.6));
+            background: linear-gradient(135deg, #8B5CF6, #6366F1);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             font-style: italic;
         }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .hero-subtitle {
+        .hero p {
             font-size: 18px;
-            color: var(--text-secondary);
-            max-width: 600px;
+            color: #666;
+            max-width: 700px;
             margin: 0 auto 50px;
             line-height: 1.7;
-            animation: fadeInUp 1s ease-out 0.2s backwards;
+            font-weight: 400;
         }
 
         .hero-cta {
             display: flex;
-            gap: 20px;
+            gap: 16px;
             justify-content: center;
-            animation: fadeInUp 1s ease-out 0.4s backwards;
         }
 
         .btn-primary {
-            background: var(--primary);
-            color: var(--dark);
-            padding: 16px 40px;
+            background: linear-gradient(135deg, #8B5CF6, #6366F1);
+            color: white;
+            padding: 14px 32px;
             border: none;
-            border-radius: 4px;
-            font-size: 13px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            text-transform: uppercase;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
-            box-shadow: 0 0 30px rgba(201, 168, 76, 0.2);
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 40px rgba(201, 168, 76, 0.4);
+            box-shadow: 0 12px 30px rgba(139, 92, 246, 0.3);
         }
 
         .btn-secondary {
-            background: transparent;
-            color: var(--light);
-            padding: 16px 40px;
-            border: 1px solid rgba(201, 168, 76, 0.5);
-            border-radius: 4px;
-            font-size: 13px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            text-transform: uppercase;
+            background: #f5f5f5;
+            color: #0a0a0a;
+            padding: 14px 32px;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
         }
 
         .btn-secondary:hover {
-            border-color: var(--primary);
-            color: var(--primary);
-            background: rgba(201, 168, 76, 0.05);
+            background: #efefef;
+            border-color: #d0d0d0;
         }
 
-        /* Glow effect on hero */
-        .hero::after {
-            content: '';
-            position: absolute;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(201, 168, 76, 0.2) 0%, transparent 70%);
-            border-radius: 50%;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            filter: blur(80px);
-            z-index: -1;
-            animation: pulse 4s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
-            50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.8; }
-        }
-
-        /* Stats Section */
+        /* Stats */
         .stats {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 1px;
-            background: rgba(201, 168, 76, 0.05);
-            padding: 0;
-            margin: 80px 60px;
-            border: 1px solid rgba(201, 168, 76, 0.1);
+            gap: 0;
+            max-width: 1200px;
+            margin: 80px auto;
+            padding: 0 60px;
         }
 
         .stat {
-            background: var(--dark);
-            padding: 50px 30px;
+            padding: 40px 20px;
             text-align: center;
-            border-right: 1px solid rgba(201, 168, 76, 0.1);
+            border-right: 1px solid #f0f0f0;
         }
 
         .stat:last-child {
@@ -318,17 +185,19 @@
         }
 
         .stat-value {
-            font-size: 48px;
-            font-weight: 700;
-            color: var(--primary);
+            font-size: 40px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #8B5CF6, #6366F1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             margin-bottom: 10px;
         }
 
         .stat-label {
-            font-size: 12px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            color: var(--text-secondary);
+            font-size: 13px;
+            color: #999;
+            font-weight: 500;
         }
 
         /* Section */
@@ -336,20 +205,18 @@
             padding: 120px 60px;
             max-width: 1400px;
             margin: 0 auto;
-            position: relative;
-            z-index: 2;
         }
 
         section h2 {
-            font-size: clamp(36px, 5vw, 64px);
-            font-weight: 700;
+            font-size: clamp(36px, 5vw, 56px);
+            font-weight: 800;
             margin-bottom: 20px;
+            letter-spacing: -1.5px;
             line-height: 1.1;
-            letter-spacing: -1px;
         }
 
         section h2 em {
-            background: linear-gradient(135deg, var(--primary), rgba(201, 168, 76, 0.6));
+            background: linear-gradient(135deg, #8B5CF6, #6366F1);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -358,103 +225,79 @@
 
         .section-intro {
             font-size: 16px;
-            color: var(--text-secondary);
+            color: #666;
             max-width: 600px;
-            margin-bottom: 80px;
+            margin-bottom: 60px;
             line-height: 1.7;
         }
 
-        /* Services Grid */
+        /* Services */
         .services-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
+            gap: 24px;
         }
 
         .service-card {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(201, 168, 76, 0.1);
-            padding: 50px 40px;
+            background: #f9f9f9;
+            border: 1px solid #f0f0f0;
+            padding: 40px 32px;
             border-radius: 8px;
             transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(201, 168, 76, 0.1) 0%, transparent 100%);
-            opacity: 0;
-            transition: opacity 0.3s;
-            z-index: 0;
         }
 
         .service-card:hover {
-            border-color: var(--primary);
-            background: rgba(201, 168, 76, 0.05);
-            transform: translateY(-5px);
-        }
-
-        .service-card:hover::before {
-            opacity: 1;
-        }
-
-        .service-card > * {
-            position: relative;
-            z-index: 1;
+            border-color: #e0e0e0;
+            background: #fafafa;
+            transform: translateY(-4px);
         }
 
         .service-icon {
-            font-size: 36px;
-            margin-bottom: 20px;
+            font-size: 32px;
+            margin-bottom: 16px;
         }
 
         .service-card h3 {
-            font-size: 24px;
+            font-size: 20px;
             font-weight: 700;
-            margin-bottom: 15px;
-            color: var(--light);
+            margin-bottom: 12px;
         }
 
         .service-card p {
             font-size: 14px;
-            color: var(--text-secondary);
+            color: #666;
             line-height: 1.7;
-            margin-bottom: 30px;
+            margin-bottom: 24px;
         }
 
         .service-features {
             list-style: none;
             font-size: 13px;
-            color: var(--text-secondary);
+            color: #888;
         }
 
         .service-features li {
-            padding: 8px 0;
+            padding: 6px 0;
             display: flex;
-            gap: 10px;
+            gap: 8px;
         }
 
         .service-features li::before {
             content: '→';
-            color: var(--primary);
+            color: #8B5CF6;
             flex-shrink: 0;
+            font-weight: 600;
         }
 
-        /* How Section */
+        /* How */
         .how-section {
-            background: rgba(201, 168, 76, 0.03);
+            background: #f5f5f5;
         }
 
         .steps-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 40px;
+            gap: 32px;
             margin-top: 60px;
         }
 
@@ -463,134 +306,176 @@
         }
 
         .step-number {
-            width: 60px;
-            height: 60px;
-            border: 2px solid rgba(201, 168, 76, 0.3);
+            width: 48px;
+            height: 48px;
+            border: 2px solid #ddd;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 20px;
-            font-size: 24px;
+            font-size: 20px;
             font-weight: 700;
-            color: var(--primary);
+            color: #8B5CF6;
             transition: all 0.3s;
         }
 
         .step:hover .step-number {
-            border-color: var(--primary);
-            background: rgba(201, 168, 76, 0.1);
+            border-color: #8B5CF6;
+            background: rgba(139, 92, 246, 0.1);
         }
 
         .step h3 {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 700;
-            margin: 20px 0;
+            margin: 16px 0;
         }
 
         .step p {
             font-size: 13px;
-            color: var(--text-secondary);
-            line-height: 1.7;
+            color: #666;
+            line-height: 1.6;
         }
 
-        /* Team Section */
+        /* Team */
         .team-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 40px;
+            gap: 24px;
             margin-top: 60px;
         }
 
         .team-card {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(201, 168, 76, 0.1);
-            padding: 50px 40px;
+            background: #f9f9f9;
+            border: 1px solid #f0f0f0;
+            padding: 40px 32px;
             border-radius: 8px;
             text-align: center;
             transition: all 0.3s;
         }
 
         .team-card:hover {
-            border-color: var(--primary);
-            background: rgba(201, 168, 76, 0.05);
+            border-color: #e0e0e0;
+            background: #fafafa;
         }
 
         .avatar {
-            width: 80px;
-            height: 80px;
+            width: 72px;
+            height: 72px;
             border-radius: 50%;
-            background: rgba(201, 168, 76, 0.1);
-            border: 2px solid var(--primary);
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(99, 102, 241, 0.1));
+            border: 2px solid #ddd;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 20px;
-            font-size: 28px;
+            margin: 0 auto 16px;
+            font-size: 24px;
             font-weight: 700;
-            color: var(--primary);
+            color: #8B5CF6;
         }
 
         .team-card h3 {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 700;
-            margin-bottom: 5px;
+            margin-bottom: 4px;
         }
 
         .team-role {
             font-size: 12px;
-            letter-spacing: 1px;
+            color: #999;
             text-transform: uppercase;
-            color: var(--primary);
-            margin-bottom: 20px;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
         }
 
         .team-card p {
             font-size: 13px;
-            color: var(--text-secondary);
-            line-height: 1.7;
+            color: #666;
+            line-height: 1.6;
         }
 
-        /* CTA Section */
+        /* CTA */
         .cta-section {
-            background: rgba(201, 168, 76, 0.03);
+            background: linear-gradient(135deg, #8B5CF6, #6366F1);
+            color: white;
             text-align: center;
             padding: 120px 60px;
-            position: relative;
         }
 
         .cta-section h2 {
-            max-width: 900px;
-            margin: 0 auto 30px;
+            color: white;
+            margin-bottom: 20px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-section h2 em {
+            background: none;
+            -webkit-background-clip: unset;
+            -webkit-text-fill-color: unset;
+            background-clip: unset;
+            color: rgba(255, 255, 255, 0.8);
         }
 
         .cta-section p {
             font-size: 16px;
-            color: var(--text-secondary);
-            max-width: 700px;
+            max-width: 600px;
             margin: 0 auto 50px;
+            opacity: 0.9;
         }
 
         .cta-buttons {
             display: flex;
-            gap: 20px;
+            gap: 16px;
             justify-content: center;
+        }
+
+        .cta-btn-primary {
+            background: white;
+            color: #8B5CF6;
+            padding: 14px 32px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .cta-btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-btn-secondary {
+            background: transparent;
+            color: white;
+            padding: 14px 32px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .cta-btn-secondary:hover {
+            border-color: white;
+            background: rgba(255, 255, 255, 0.1);
         }
 
         /* Footer */
         footer {
-            background: var(--dark-lighter);
-            border-top: 1px solid rgba(201, 168, 76, 0.1);
-            padding: 60px;
+            background: #f5f5f5;
+            border-top: 1px solid #e0e0e0;
+            padding: 50px 60px;
             text-align: center;
-            position: relative;
-            z-index: 2;
         }
 
         footer p {
             font-size: 13px;
-            color: var(--text-secondary);
-            letter-spacing: 1px;
+            color: #999;
         }
 
         /* Responsive */
@@ -603,22 +488,22 @@
                 gap: 30px;
             }
 
-            .hero {
-                padding: 100px 30px 50px;
-            }
-
-            .hero-cta {
-                flex-direction: column;
-                align-items: center;
+            section {
+                padding: 80px 30px;
             }
 
             .stats {
+                padding: 0 30px;
                 grid-template-columns: repeat(2, 1fr);
-                margin: 60px 30px;
             }
 
-            section {
-                padding: 80px 30px;
+            .stat {
+                border-right: none;
+                border-bottom: 1px solid #f0f0f0;
+            }
+
+            .stat:nth-child(2n) {
+                border-right: 1px solid #f0f0f0;
             }
 
             .services-grid,
@@ -634,7 +519,7 @@
         @media (max-width: 640px) {
             nav {
                 flex-direction: column;
-                gap: 20px;
+                gap: 16px;
                 padding: 16px;
             }
 
@@ -645,194 +530,208 @@
 
             .hero h1 {
                 font-size: 32px;
+                letter-spacing: -1px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+                gap: 12px;
             }
 
             .btn-primary, .btn-secondary {
-                padding: 12px 24px;
-                font-size: 11px;
+                width: 100%;
+            }
+
+            section {
+                padding: 60px 20px;
             }
 
             .stats {
+                padding: 0 20px;
                 grid-template-columns: 1fr;
+            }
+
+            .stat {
+                border: none;
+                border-bottom: 1px solid #f0f0f0;
+            }
+
+            .stat:last-child {
+                border-bottom: none;
             }
 
             .steps-grid {
                 grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .cta-section {
+                padding: 80px 20px;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .cta-btn-primary, .cta-btn-secondary {
+                width: 100%;
             }
         }
     </style>
 </head>
 <body>
-    <div class="stars" id="stars"></div>
-
     <nav>
         <div class="logo">◆ ORQUESTA</div>
         <ul>
             <li><a href="#servicios">Services</a></li>
             <li><a href="#metodo">Method</a></li>
             <li><a href="#equipo">Team</a></li>
-            <li><button class="nav-btn">Get In Touch →</button></li>
+            <li><button class="nav-btn">Get In Touch</button></li>
         </ul>
     </nav>
 
-    <main>
-        <section class="hero">
-            <span class="hero-badge">New Era of Business</span>
-            <h1>Intelligent Automation<br>for <em>Modern Businesses.</em></h1>
-            <p class="hero-subtitle">Orquesta brings AI automation to your operations. Streamline workflows, amplify sales, and make decisions based on real data.</p>
-            <div class="hero-cta">
-                <button class="btn-primary">Get In Touch →</button>
-                <button class="btn-secondary">View Services</button>
-            </div>
-        </section>
+    <section class="hero">
+        <h1>Automation that <em>scales</em><br>your business.</h1>
+        <p>Intelligent agents handle your operations 24/7. More leads. Better decisions. Real growth.</p>
+        <div class="hero-cta">
+            <button class="btn-primary">Get Started</button>
+            <button class="btn-secondary">Learn More</button>
+        </div>
+    </section>
 
-        <div class="stats">
-            <div class="stat">
-                <div class="stat-value">80%</div>
-                <div class="stat-label">Time Reduction</div>
+    <div class="stats">
+        <div class="stat">
+            <div class="stat-value">80%</div>
+            <div class="stat-label">Time Reduction</div>
+        </div>
+        <div class="stat">
+            <div class="stat-value">3×</div>
+            <div class="stat-label">More Qualified Leads</div>
+        </div>
+        <div class="stat">
+            <div class="stat-value">48h</div>
+            <div class="stat-label">To Implementation</div>
+        </div>
+        <div class="stat">
+            <div class="stat-value">100%</div>
+            <div class="stat-label">Measurable ROI</div>
+        </div>
+    </div>
+
+    <section id="servicios">
+        <h2>What we <em>do.</em></h2>
+        <p class="section-intro">Three core services. One mission: make your business unstoppable.</p>
+        
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">💬</div>
+                <h3>WhatsApp & CRM</h3>
+                <p>Your agent responds, qualifies, and closes. 24/7 without breaking a sweat.</p>
+                <ul class="service-features">
+                    <li>Automatic responses</li>
+                    <li>Lead qualification</li>
+                    <li>HubSpot sync</li>
+                    <li>Smart alerts</li>
+                </ul>
             </div>
-            <div class="stat">
-                <div class="stat-value">3×</div>
-                <div class="stat-label">More Qualified Leads</div>
+            <div class="service-card">
+                <div class="service-icon">📊</div>
+                <h3>Analytics</h3>
+                <p>Data that makes sense. No dashboards. Just actionable insights.</p>
+                <ul class="service-features">
+                    <li>Real-time analysis</li>
+                    <li>Performance tracking</li>
+                    <li>Optimization tips</li>
+                    <li>AI-powered reports</li>
+                </ul>
             </div>
-            <div class="stat">
-                <div class="stat-value">48h</div>
-                <div class="stat-label">To Implementation</div>
-            </div>
-            <div class="stat">
-                <div class="stat-value">100%</div>
-                <div class="stat-label">Measurable ROI</div>
+            <div class="service-card">
+                <div class="service-icon">🎯</div>
+                <h3>Market Research</h3>
+                <p>Evidence-based decisions. Statistical rigor meets AI insight.</p>
+                <ul class="service-features">
+                    <li>Surveys at scale</li>
+                    <li>Data analysis</li>
+                    <li>Competitive insights</li>
+                    <li>Strategic reports</li>
+                </ul>
             </div>
         </div>
+    </section>
 
-        <section id="servicios">
-            <h2>Our <em>Services</em></h2>
-            <p class="section-intro">Combine the right agents to make your business hum like a well-conducted orchestra.</p>
-            
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">💬</div>
-                    <h3>WhatsApp & CRM</h3>
-                    <p>Your agent responds, qualifies, and registers every client in real-time. 24/7 without breaking a sweat.</p>
-                    <ul class="service-features">
-                        <li>Automatic 24/7 attention</li>
-                        <li>Intelligent qualification</li>
-                        <li>HubSpot & Pipedrive sync</li>
-                        <li>Smart alerts</li>
-                    </ul>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">📊</div>
-                    <h3>E-commerce Analytics</h3>
-                    <p>Turn data into decisions. No manual interpretation. Pure AI insights that move your needle.</p>
-                    <ul class="service-features">
-                        <li>Pixel audit</li>
-                        <li>Abandonment analysis</li>
-                        <li>Campaign optimization</li>
-                        <li>AI reports</li>
-                    </ul>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">🎯</div>
-                    <h3>Market Research</h3>
-                    <p>Statistical rigor meets AI insight. Decisions backed by evidence, not hunches.</p>
-                    <ul class="service-features">
-                        <li>Statistical sampling</li>
-                        <li>INDEC weighting</li>
-                        <li>Advanced analysis</li>
-                        <li>Strategic insight</li>
-                    </ul>
-                </div>
+    <section class="how-section" id="metodo">
+        <h2>How it <em>works.</em></h2>
+        <p class="section-intro">Four simple steps to transform your operations.</p>
+        
+        <div class="steps-grid">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>Audit</h3>
+                <p>We analyze your workflows and find the quick wins.</p>
             </div>
-        </section>
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>Design</h3>
+                <p>We build agents customized for your business.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>Deploy</h3>
+                <p>Live in 48 hours. Integrated with your tools.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <h3>Optimize</h3>
+                <p>We monitor and improve continuously.</p>
+            </div>
+        </div>
+    </section>
 
-        <section class="how-section" id="metodo">
-            <h2>From Chaos to <em>Harmony.</em></h2>
-            <p class="section-intro">Our 4-step process turns manual operations into self-running systems.</p>
-            
-            <div class="steps-grid">
-                <div class="step">
-                    <div class="step-number">I</div>
-                    <h3>Diagnosis</h3>
-                    <p>We analyze your ops and find where automation hits hardest.</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">II</div>
-                    <h3>Design</h3>
-                    <p>We build the agent orchestra specific to your goals.</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">III</div>
-                    <h3>Implement</h3>
-                    <p>We deploy and integrate everything in under 48 hours.</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">IV</div>
-                    <h3>Measure</h3>
-                    <p>We monitor, optimize, and maximize your impact continuously.</p>
-                </div>
+    <section id="equipo">
+        <h2>Our <em>founders.</em></h2>
+        <p class="section-intro">Built by operators who understand real business challenges.</p>
+        
+        <div class="team-grid">
+            <div class="team-card">
+                <div class="avatar">IC</div>
+                <h3>Ignacio Carrere</h3>
+                <p class="team-role">CEO</p>
+                <p>Operations expert. Built and scaled automation systems at 9-figure companies.</p>
             </div>
-        </section>
+            <div class="team-card">
+                <div class="avatar">JA</div>
+                <h3>Juan Adaro</h3>
+                <p class="team-role">CTO</p>
+                <p>AI architect. Designs agent infrastructure that actually works in production.</p>
+            </div>
+            <div class="team-card">
+                <div class="avatar">TY</div>
+                <h3>Tomás Yuste</h3>
+                <p class="team-role">CGO</p>
+                <p>Growth expert. Knows how to scale from zero to $10M ARR.</p>
+            </div>
+        </div>
+    </section>
 
-        <section id="equipo">
-            <h2>The People Behind<br>the <em>Baton.</em></h2>
-            <p class="section-intro">Three founders with real experience in tech, business, and growth strategy.</p>
-            
-            <div class="team-grid">
-                <div class="team-card">
-                    <div class="avatar">IC</div>
-                    <h3>Ignacio Carrere</h3>
-                    <p class="team-role">CEO & Co-Founder</p>
-                    <p>Leads operations and strategy. Expert in automating complex processes at scale.</p>
-                </div>
-                <div class="team-card">
-                    <div class="avatar">JA</div>
-                    <h3>Juan Adaro</h3>
-                    <p class="team-role">CTO & Co-Founder</p>
-                    <p>AI architect. Designs the agent infrastructure that makes it all possible.</p>
-                </div>
-                <div class="team-card">
-                    <div class="avatar">TY</div>
-                    <h3>Tomás Yuste</h3>
-                    <p class="team-role">CGO & Co-Founder</p>
-                    <p>Growth strategy expert. Connects solutions to businesses that need them.</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="cta-section">
-            <h2>Ready for your business<br>to sound like an <em>orchestra?</em></h2>
-            <p>Free consultation. Diagnosis in 48 hours. No commitment.</p>
-            <div class="cta-buttons">
-                <button class="btn-primary">Schedule Call →</button>
-                <button class="btn-secondary">Learn More</button>
-            </div>
-        </section>
-    </main>
+    <section class="cta-section">
+        <h2>Ready to <em>automate?</em></h2>
+        <p>Free consultation. No credit card. Just 30 minutes of focused time.</p>
+        <div class="cta-buttons">
+            <button class="cta-btn-primary">Schedule a Call</button>
+            <button class="cta-btn-secondary">See Pricing</button>
+        </div>
+    </section>
 
     <footer>
-        <p>© 2026 ORQUESTA. All rights reserved. · hola@orquesta.ai · +54 9 11 0000-0000</p>
+        <p>© 2026 ORQUESTA. Built by operators, for operators. · hola@orquesta.ai</p>
     </footer>
 
     <script>
-        // Generate random stars
-        function generateStars() {
-            const starsContainer = document.getElementById('stars');
-            const starCount = 100;
-            
-            for (let i = 0; i < starCount; i++) {
-                const star = document.createElement('div');
-                star.className = 'star';
-                star.style.left = Math.random() * 100 + '%';
-                star.style.top = Math.random() * 100 + '%';
-                star.style.animationDelay = Math.random() * 3 + 's';
-                starsContainer.appendChild(star);
-            }
-        }
-        
-        generateStars();
-
-        // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
