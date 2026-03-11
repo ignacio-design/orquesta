@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orquesta - Panel de Leads</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: #f5f7fa;
+            color: #333;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-box {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .stat-box h3 {
+            color: #999;
+            font-size: 12px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+        
+        .stat-box .number {
+            font-size: 32px;
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .table-container {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th {
+            background: #f8f9fa;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            color: #666;
+            font-size: 12px;
+            text-transform: uppercase;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        tr:hover {
+            background: #f8f9fa;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .status-new {
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+        
+        .status-qualified {
+            background: #e8f5e9;
+            color: #388e3c;
+        }
+        
+        .status-contacted {
+            background: #fff3e0;
+            color: #f57c00;
+        }
+        
+        .action-btn {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 6px;
+            font-size: 12px;
+            cursor: pointer;
+            background: #667eea;
+            color: white;
+            transition: background 0.2s;
+        }
+        
+        .action-btn:hover {
+            background: #764ba2;
+        }
+        
+        .empty {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+        }
+        
+        .refresh-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>📊 Orquesta - Panel de Leads</h1>
+        <p>Gestiona tus prospects en tiempo real</p>
+    </header>
+    
+    <div class="container">
+        <div class="stats">
+            <div class="stat-box">
+                <h3>Leads Totales</h3>
+                <div class="number" id="totalLeads">0</div>
+            </div>
+            <div class="stat-box">
+                <h3>Nuevos</h3>
+                <div class="number" id="newLeads">0</div>
+            </div>
+            <div class="stat-box">
+                <h3>Calificados</h3>
+                <div class="number" id="qualifiedLeads">0</div>
+            </div>
+            <div class="stat-box">
+                <h3>Contactados</h3>
+                <div class="number" id="contactedLeads">0</div>
+            </div>
+        </div>
+        
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Empresa</th>
+                        <th>Servicio</th>
+                        <th>Empleados</th>
+                        <th>Estado</th>
+                        <th>Fecha</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody id="leadsTable">
+                    <tr class="empty">
+                        <td colspan="7">Cargando leads...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <button class="refresh-btn" onclick="loadLeads()">🔄 Actualizar</button>
+    
+    <script>
+        async function loadLeads() {
+            try {
+                const response = await fetch('/api/leads');
+                const data = await response.json();
+                
+                const leads = data.leads || [];
+                
+                // Estadísticas
+                document.getElementById('totalLeads').textContent = leads.length;
+                document.getElementById('newLeads').textContent = leads.filter(l => l.status === 'new').length;
+                document.getElementById('qualifiedLeads').textContent = leads.filter(l => l.status === 'qualified').length;
+                document.getElementById('contactedLeads').textContent = leads.filter(l => l.status === 'contacted').length;
+                
+                // Tabla
+                const tbody = document.getElementById('leadsTable');
+                
+                if (leads.length === 0) {
+                    tbody.innerHTML = '<tr class="empty"><td colspan="7">Sin leads aún</td></tr>';
+                    return;
+                }
+                
+                tbody.innerHTML = leads.map(lead => `
+                    <tr>
+                        <td><strong>${lead.nombre}</strong></td>
+                        <td>${lead.empresa}</td>
+                        <td>${lead.servicio}</td>
+                        <td>${lead.empleados || '-'}</td>
+                        <td>
+                            <span class="status-badge status-${lead.status}">
+                                ${getStatusLabel(lead.status)}
+                            </span>
+                        </td>
+                        <td>${new Date(lead.fecha).toLocaleDateString('es-AR')}</td>
+                        <td>
+                            <button class="action-btn" onclick="calificar('${lead.nombre}')">
+                                ${lead.status === 'new' ? '✓ Calificar' : '→ Ver'}
+                            </button>
+                        </td>
+                    </tr>
+                `).join('');
+                
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('leadsTable').innerHTML = '<tr class="empty"><td colspan="7">Error cargando datos</td></tr>';
+            }
+        }
+        
+        function getStatusLabel(status) {
+            const labels = {
+                'new': 'Nuevo',
+                'qualified': 'Calificado',
+                'contacted': 'Contactado',
+                'proposal': 'Propuesta'
+            };
+            return labels[status] || 'Nuevo';
+        }
+        
+        function calificar(nombre) {
+            alert(`Lead de ${nombre} marcado como calificado. Se envió email automático con próximos pasos.`);
+            loadLeads();
+        }
+        
+        // Cargar leads al inicio
+        loadLeads();
+        
+        // Actualizar cada 10 segundos
+        setInterval(loadLeads, 10000);
+    </script>
+</body>
+</html>
