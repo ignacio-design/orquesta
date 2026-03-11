@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ORQUESTA — AI Automation</title>
+    <title>ORQUESTA — AI Automation for Business</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * {
@@ -95,7 +95,6 @@
             align-items: center;
             text-align: center;
             padding: 120px 60px 60px;
-            position: relative;
         }
 
         .hero h1 {
@@ -140,6 +139,8 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
         }
 
         .btn-primary:hover {
@@ -157,6 +158,8 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
         }
 
         .btn-secondary:hover {
@@ -289,6 +292,70 @@
             font-weight: 600;
         }
 
+        /* Pricing */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 60px;
+        }
+
+        .pricing-card {
+            background: #f9f9f9;
+            border: 1px solid #f0f0f0;
+            padding: 40px 32px;
+            border-radius: 8px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .pricing-card:hover {
+            border-color: #8B5CF6;
+            background: rgba(139, 92, 246, 0.03);
+        }
+
+        .pricing-card.featured {
+            border-color: #8B5CF6;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.05), rgba(99, 102, 241, 0.05));
+        }
+
+        .price-name {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .price-amount {
+            font-size: 40px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #8B5CF6, #6366F1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 24px;
+        }
+
+        .price-features {
+            list-style: none;
+            font-size: 13px;
+            color: #666;
+            text-align: left;
+            margin-bottom: 24px;
+        }
+
+        .price-features li {
+            padding: 8px 0;
+            display: flex;
+            gap: 8px;
+        }
+
+        .price-features li::before {
+            content: '✓';
+            color: #8B5CF6;
+            flex-shrink: 0;
+            font-weight: 700;
+        }
+
         /* How */
         .how-section {
             background: #f5f5f5;
@@ -411,10 +478,6 @@
         }
 
         .cta-section h2 em {
-            background: none;
-            -webkit-background-clip: unset;
-            -webkit-text-fill-color: unset;
-            background-clip: unset;
             color: rgba(255, 255, 255, 0.8);
         }
 
@@ -441,6 +504,8 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
         }
 
         .cta-btn-primary:hover {
@@ -458,6 +523,8 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
         }
 
         .cta-btn-secondary:hover {
@@ -502,11 +569,8 @@
                 border-bottom: 1px solid #f0f0f0;
             }
 
-            .stat:nth-child(2n) {
-                border-right: 1px solid #f0f0f0;
-            }
-
             .services-grid,
+            .pricing-grid,
             .team-grid {
                 grid-template-columns: 1fr;
             }
@@ -530,20 +594,11 @@
 
             .hero h1 {
                 font-size: 32px;
-                letter-spacing: -1px;
-            }
-
-            .hero p {
-                font-size: 16px;
             }
 
             .hero-cta {
                 flex-direction: column;
                 gap: 12px;
-            }
-
-            .btn-primary, .btn-secondary {
-                width: 100%;
             }
 
             section {
@@ -553,15 +608,6 @@
             .stats {
                 padding: 0 20px;
                 grid-template-columns: 1fr;
-            }
-
-            .stat {
-                border: none;
-                border-bottom: 1px solid #f0f0f0;
-            }
-
-            .stat:last-child {
-                border-bottom: none;
             }
 
             .steps-grid {
@@ -577,10 +623,6 @@
                 flex-direction: column;
                 gap: 12px;
             }
-
-            .cta-btn-primary, .cta-btn-secondary {
-                width: 100%;
-            }
         }
     </style>
 </head>
@@ -589,146 +631,191 @@
         <div class="logo">◆ ORQUESTA</div>
         <ul>
             <li><a href="#servicios">Services</a></li>
+            <li><a href="#precios">Pricing</a></li>
             <li><a href="#metodo">Method</a></li>
             <li><a href="#equipo">Team</a></li>
-            <li><button class="nav-btn">Get In Touch</button></li>
+            <li><a href="https://wa.me/447537166676?text=Hi%20Orquesta%20team" target="_blank" class="nav-btn">WhatsApp</a></li>
         </ul>
     </nav>
 
     <section class="hero">
-        <h1>Automation that <em>scales</em><br>your business.</h1>
-        <p>Intelligent agents handle your operations 24/7. More leads. Better decisions. Real growth.</p>
+        <h1>Tus procesos,<br>en <em>armonía</em></h1>
+        <p>Automatizamos las operaciones de tu negocio con agentes de inteligencia artificial. Más ventas, menos tiempo perdido, decisiones basadas en datos reales.</p>
         <div class="hero-cta">
-            <button class="btn-primary">Get Started</button>
-            <button class="btn-secondary">Learn More</button>
+            <a href="https://wa.me/447537166676?text=Hola%20Orquesta%20%F0%9F%91%8B" class="btn-primary">Comenzar ahora</a>
+            <a href="#servicios" class="btn-secondary">Ver servicios</a>
         </div>
     </section>
 
     <div class="stats">
         <div class="stat">
             <div class="stat-value">80%</div>
-            <div class="stat-label">Time Reduction</div>
+            <div class="stat-label">Reducción en tiempos</div>
         </div>
         <div class="stat">
             <div class="stat-value">3×</div>
-            <div class="stat-label">More Qualified Leads</div>
+            <div class="stat-label">Más leads calificados</div>
         </div>
         <div class="stat">
             <div class="stat-value">48h</div>
-            <div class="stat-label">To Implementation</div>
+            <div class="stat-label">Hasta implementación</div>
         </div>
         <div class="stat">
             <div class="stat-value">100%</div>
-            <div class="stat-label">Measurable ROI</div>
+            <div class="stat-label">ROI medible</div>
         </div>
     </div>
 
     <section id="servicios">
-        <h2>What we <em>do.</em></h2>
-        <p class="section-intro">Three core services. One mission: make your business unstoppable.</p>
+        <h2>Nuestros <em>servicios</em></h2>
+        <p class="section-intro">Combinamos agentes de IA para automatizar cada aspecto de tu negocio.</p>
         
         <div class="services-grid">
             <div class="service-card">
                 <div class="service-icon">💬</div>
                 <h3>WhatsApp & CRM</h3>
-                <p>Your agent responds, qualifies, and closes. 24/7 without breaking a sweat.</p>
+                <p>Tu agente responde, califica y registra cada cliente automáticamente. 24/7 sin descanso.</p>
                 <ul class="service-features">
-                    <li>Automatic responses</li>
-                    <li>Lead qualification</li>
-                    <li>HubSpot sync</li>
-                    <li>Smart alerts</li>
+                    <li>Atención automática 24/7</li>
+                    <li>Calificación inteligente</li>
+                    <li>HubSpot & Pipedrive</li>
+                    <li>Alertas automáticas</li>
                 </ul>
             </div>
             <div class="service-card">
                 <div class="service-icon">📊</div>
-                <h3>Analytics</h3>
-                <p>Data that makes sense. No dashboards. Just actionable insights.</p>
+                <h3>E-commerce Analytics</h3>
+                <p>Convierte datos en decisiones. Análisis automático de tu tienda sin interpretaciones manuales.</p>
                 <ul class="service-features">
-                    <li>Real-time analysis</li>
-                    <li>Performance tracking</li>
-                    <li>Optimization tips</li>
-                    <li>AI-powered reports</li>
+                    <li>Auditoría de píxeles</li>
+                    <li>Análisis de abandono</li>
+                    <li>Optimización Meta/Google</li>
+                    <li>Reportes con IA</li>
                 </ul>
             </div>
             <div class="service-card">
                 <div class="service-icon">🎯</div>
                 <h3>Market Research</h3>
-                <p>Evidence-based decisions. Statistical rigor meets AI insight.</p>
+                <p>Investigación de mercado con rigor estadístico e insights generados por IA.</p>
                 <ul class="service-features">
-                    <li>Surveys at scale</li>
-                    <li>Data analysis</li>
-                    <li>Competitive insights</li>
-                    <li>Strategic reports</li>
+                    <li>Muestreo estadístico</li>
+                    <li>Ponderación INDEC</li>
+                    <li>Análisis avanzado</li>
+                    <li>Insights estratégicos</li>
                 </ul>
             </div>
         </div>
     </section>
 
+    <section id="precios">
+        <h2>Planes y <em>precios</em></h2>
+        <p class="section-intro">Elige el plan que se adapte a tu negocio.</p>
+        
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <div class="price-name">BASIC</div>
+                <div class="price-amount">$150<span style="font-size: 16px; color: #999;">/mes</span></div>
+                <ul class="price-features">
+                    <li>Telegram Bot automático</li>
+                    <li>Hasta 50 leads/mes</li>
+                    <li>Sincronización HubSpot</li>
+                    <li>Dashboard en tiempo real</li>
+                    <li>Email de notificación</li>
+                </ul>
+                <a href="https://wa.me/447537166676?text=Interesado%20en%20plan%20BASIC" class="btn-primary">Empezar</a>
+            </div>
+            <div class="pricing-card featured">
+                <div class="price-name">PRO</div>
+                <div class="price-amount">$300<span style="font-size: 16px; color: #999;">/mes</span></div>
+                <ul class="price-features">
+                    <li>Todo lo de BASIC +</li>
+                    <li>Hasta 200 leads/mes</li>
+                    <li>WhatsApp Bot automático</li>
+                    <li>Análisis mejorado</li>
+                    <li>Reportes semanales</li>
+                </ul>
+                <a href="https://wa.me/447537166676?text=Interesado%20en%20plan%20PRO" class="btn-primary">Empezar</a>
+            </div>
+            <div class="pricing-card">
+                <div class="price-name">FULL</div>
+                <div class="price-amount">$500<span style="font-size: 16px; color: #999;">/mes</span></div>
+                <ul class="price-features">
+                    <li>Todo lo de PRO +</li>
+                    <li>Leads ilimitados</li>
+                    <li>Integraciones custom</li>
+                    <li>Soporte 24/7</li>
+                    <li>Personalización total</li>
+                </ul>
+                <a href="https://wa.me/447537166676?text=Interesado%20en%20plan%20FULL" class="btn-primary">Empezar</a>
+            </div>
+        </div>
+    </section>
+
     <section class="how-section" id="metodo">
-        <h2>How it <em>works.</em></h2>
-        <p class="section-intro">Four simple steps to transform your operations.</p>
+        <h2>Del caos a la <em>armonía</em></h2>
+        <p class="section-intro">Nuestro proceso de 4 pasos convierte tus operaciones manuales en sistemas que trabajan solos.</p>
         
         <div class="steps-grid">
             <div class="step">
-                <div class="step-number">1</div>
-                <h3>Audit</h3>
-                <p>We analyze your workflows and find the quick wins.</p>
+                <div class="step-number">I</div>
+                <h3>Diagnóstico</h3>
+                <p>Analizamos tus procesos e identificamos oportunidades de automatización.</p>
             </div>
             <div class="step">
-                <div class="step-number">2</div>
-                <h3>Design</h3>
-                <p>We build agents customized for your business.</p>
+                <div class="step-number">II</div>
+                <h3>Diseño</h3>
+                <p>Diseñamos la orquesta de agentes específica para tus objetivos.</p>
             </div>
             <div class="step">
-                <div class="step-number">3</div>
-                <h3>Deploy</h3>
-                <p>Live in 48 hours. Integrated with your tools.</p>
+                <div class="step-number">III</div>
+                <h3>Implementación</h3>
+                <p>Desplegamos e integramos los agentes en menos de 48 horas.</p>
             </div>
             <div class="step">
-                <div class="step-number">4</div>
-                <h3>Optimize</h3>
-                <p>We monitor and improve continuously.</p>
+                <div class="step-number">IV</div>
+                <h3>Medición</h3>
+                <p>Monitoreamos resultados y afinamos continuamente.</p>
             </div>
         </div>
     </section>
 
     <section id="equipo">
-        <h2>Our <em>founders.</em></h2>
-        <p class="section-intro">Built by operators who understand real business challenges.</p>
+        <h2>Las personas detrás<br>de la <em>batuta</em></h2>
+        <p class="section-intro">Tres fundadores con experiencia real en tecnología, negocios y estrategia.</p>
         
         <div class="team-grid">
             <div class="team-card">
                 <div class="avatar">IC</div>
                 <h3>Ignacio Carrere</h3>
-                <p class="team-role">CEO</p>
-                <p>Operations expert. Built and scaled automation systems at 9-figure companies.</p>
+                <p class="team-role">CEO & Co-Founder</p>
+                <p>Experto en gestión operacional y automatización de procesos en entornos de alta complejidad.</p>
             </div>
             <div class="team-card">
                 <div class="avatar">JA</div>
                 <h3>Juan Adaro</h3>
-                <p class="team-role">CTO</p>
-                <p>AI architect. Designs agent infrastructure that actually works in production.</p>
+                <p class="team-role">CTO & Co-Founder</p>
+                <p>Arquitecto de sistemas de inteligencia artificial y automatización.</p>
             </div>
             <div class="team-card">
                 <div class="avatar">TY</div>
                 <h3>Tomás Yuste</h3>
-                <p class="team-role">CGO</p>
-                <p>Growth expert. Knows how to scale from zero to $10M ARR.</p>
+                <p class="team-role">CGO & Co-Founder</p>
+                <p>Especialista en estrategia de crecimiento, marketing digital y desarrollo comercial.</p>
             </div>
         </div>
     </section>
 
     <section class="cta-section">
-        <h2>Ready to <em>automate?</em></h2>
-        <p>Free consultation. No credit card. Just 30 minutes of focused time.</p>
+        <h2>¿Listo para que tu negocio<br>suene como una <em>orquesta?</em></h2>
+        <p>Primera consulta sin costo. Diagnóstico en 48 horas. Sin compromisos.</p>
         <div class="cta-buttons">
-            <button class="cta-btn-primary">Schedule a Call</button>
-            <button class="cta-btn-secondary">See Pricing</button>
+            <a href="https://wa.me/447537166676?text=Hola%20Orquesta!%20Me%20interesa%20una%20consulta" class="cta-btn-primary">Chat en WhatsApp</a>
+            <a href="mailto:hola@orquesta.ai" class="cta-btn-secondary">Enviar email</a>
         </div>
     </section>
 
     <footer>
-        <p>© 2026 ORQUESTA. Built by operators, for operators. · hola@orquesta.ai</p>
+        <p>© 2026 ORQUESTA. Todos los derechos reservados. · hola@orquesta.ai · <a href="https://wa.me/447537166676" style="color: #8B5CF6; text-decoration: none; font-weight: 600;">+44 7537 166676</a></p>
     </footer>
 
     <script>
