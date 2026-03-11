@@ -1,283 +1,623 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Orquesta - Automatiza tus Leads</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'DM Sans', sans-serif;
-            background-color: #f5f2ec;
-            color: #0a0a0a;
-            line-height: 1.6;
-        }
-        
-        header {
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
-            color: white;
-            padding: 60px 40px;
-            text-align: center;
-        }
-        
-        h1 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            color: #c9a84c;
-        }
-        
-        .subtitle {
-            font-size: 1.3rem;
-            color: #e0e0e0;
-            margin-bottom: 30px;
-        }
-        
-        .cta-button {
-            background-color: #c9a84c;
-            color: #0a0a0a;
-            padding: 16px 32px;
-            border: none;
-            border-radius: 8px;
-            font-size: 1.1rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-        }
-        
-        .cta-button:hover {
-            background-color: #dab84d;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(201, 168, 76, 0.3);
-        }
-        
-        section {
-            padding: 60px 40px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        section h2 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2.5rem;
-            margin-bottom: 30px;
-            color: #0a0a0a;
-        }
-        
-        .services {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-bottom: 40px;
-        }
-        
-        .service-card {
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-        }
-        
-        .service-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .service-card h3 {
-            color: #c9a84c;
-            margin-bottom: 15px;
-            font-size: 1.5rem;
-        }
-        
-        .service-card p {
-            color: #555;
-            margin-bottom: 20px;
-        }
-        
-        .price {
-            font-size: 1.8rem;
-            color: #0a0a0a;
-            font-weight: 700;
-        }
-        
-        .pricing-plans {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-        }
-        
-        .plan {
-            background: white;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-        
-        .plan.featured {
-            border: 3px solid #c9a84c;
-            transform: scale(1.05);
-        }
-        
-        .plan h3 {
-            font-size: 1.8rem;
-            color: #0a0a0a;
-            margin-bottom: 15px;
-        }
-        
-        .plan-price {
-            font-size: 2.5rem;
-            color: #c9a84c;
-            font-weight: 700;
-            margin-bottom: 20px;
-        }
-        
-        .plan ul {
-            list-style: none;
-            text-align: left;
-            margin-bottom: 30px;
-        }
-        
-        .plan li {
-            padding: 10px 0;
-            border-bottom: 1px solid #f0f0f0;
-            color: #555;
-        }
-        
-        footer {
-            background: #0a0a0a;
-            color: white;
-            text-align: center;
-            padding: 30px;
-            margin-top: 60px;
-        }
-        
-        .contact-info {
-            margin-top: 20px;
-        }
-        
-        .contact-info p {
-            margin: 10px 0;
-        }
-        
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
-            }
-            
-            section h2 {
-                font-size: 1.8rem;
-            }
-            
-            .plan.featured {
-                transform: scale(1);
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ORQUESTA — Tus procesos, en armonía</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --negro: #0a0a0a;
+    --dorado: #c9a84c;
+    --dorado-claro: #e8c97a;
+    --dorado-oscuro: #8a6d2f;
+    --blanco: #f5f2ec;
+    --gris: #888880;
+    --gris-oscuro: #1a1a18;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--negro);
+    color: var(--blanco);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+    cursor: none;
+  }
+  .cursor {
+    width: 8px; height: 8px;
+    background: var(--dorado);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.1s;
+  }
+  .cursor-ring {
+    width: 32px; height: 32px;
+    border: 1px solid rgba(201,168,76,0.4);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9998;
+    transition: all 0.15s ease;
+  }
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 24px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(201,168,76,0.1);
+    background: rgba(10,10,10,0.9);
+    backdrop-filter: blur(20px);
+  }
+  .logo-wrap { display: flex; align-items: center; gap: 12px; }
+  .logo-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 0.35em;
+    color: var(--dorado);
+    text-transform: uppercase;
+  }
+  .nav-links { display: flex; gap: 40px; list-style: none; align-items: center; }
+  .nav-links a {
+    color: var(--gris);
+    text-decoration: none;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--dorado); }
+  .nav-cta {
+    border: 1px solid var(--dorado) !important;
+    color: var(--dorado) !important;
+    padding: 10px 24px;
+    transition: all 0.3s !important;
+  }
+  .nav-cta:hover { background: var(--dorado) !important; color: var(--negro) !important; }
+
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 120px 60px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 60% 50%, rgba(201,168,76,0.07) 0%, transparent 70%);
+  }
+  .hero-content { position: relative; z-index: 2; max-width: 680px; }
+  .hero-eyebrow {
+    font-size: 11px; letter-spacing: 0.45em; text-transform: uppercase;
+    color: var(--dorado); margin-bottom: 32px;
+    opacity: 0; animation: fadeUp 0.8s ease forwards 0.3s;
+    display: flex; align-items: center; gap: 16px;
+  }
+  .hero-eyebrow::before {
+    content: ''; display: inline-block; width: 40px; height: 1px;
+    background: var(--dorado); opacity: 0.6;
+  }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(52px, 6.5vw, 92px);
+    font-weight: 300; line-height: 0.95; margin-bottom: 36px;
+    opacity: 0; animation: fadeUp 0.8s ease forwards 0.5s;
+  }
+  .hero-title em { font-style: italic; color: var(--dorado); }
+  .hero-subtitle {
+    font-size: 15px; line-height: 1.9; color: var(--gris);
+    max-width: 460px; margin-bottom: 56px;
+    opacity: 0; animation: fadeUp 0.8s ease forwards 0.7s;
+  }
+  .hero-actions {
+    display: flex; gap: 32px; align-items: center;
+    opacity: 0; animation: fadeUp 0.8s ease forwards 0.9s;
+  }
+  .btn-primary {
+    background: var(--dorado); color: var(--negro);
+    padding: 15px 40px; font-size: 12px; letter-spacing: 0.25em;
+    text-transform: uppercase; text-decoration: none;
+    font-family: 'DM Sans', sans-serif; font-weight: 500;
+    transition: all 0.3s; display: inline-block;
+  }
+  .btn-primary:hover {
+    background: var(--dorado-claro); transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(201,168,76,0.25);
+  }
+  .btn-secondary {
+    color: var(--gris); font-size: 12px; letter-spacing: 0.18em;
+    text-transform: uppercase; text-decoration: none;
+    display: flex; align-items: center; gap: 12px; transition: color 0.3s;
+  }
+  .btn-secondary:hover { color: var(--blanco); }
+  .btn-secondary::after { content: '→'; transition: transform 0.3s; }
+  .btn-secondary:hover::after { transform: translateX(5px); }
+
+  .wave-container {
+    position: absolute; right: 100px; top: 50%; transform: translateY(-50%);
+    opacity: 0; animation: fadeIn 1.2s ease forwards 1.2s;
+  }
+  .wave-bars { display: flex; align-items: center; gap: 5px; height: 140px; }
+  .wave-bar {
+    width: 3px;
+    background: linear-gradient(180deg, var(--dorado-claro), var(--dorado-oscuro));
+    border-radius: 2px; animation: wave 1.8s ease-in-out infinite;
+  }
+  .wave-bar:nth-child(1)  { height: 15%; animation-delay: 0.0s; }
+  .wave-bar:nth-child(2)  { height: 30%; animation-delay: 0.1s; }
+  .wave-bar:nth-child(3)  { height: 55%; animation-delay: 0.2s; }
+  .wave-bar:nth-child(4)  { height: 75%; animation-delay: 0.3s; }
+  .wave-bar:nth-child(5)  { height: 95%; animation-delay: 0.4s; }
+  .wave-bar:nth-child(6)  { height: 100%; animation-delay: 0.5s; }
+  .wave-bar:nth-child(7)  { height: 88%; animation-delay: 0.6s; }
+  .wave-bar:nth-child(8)  { height: 65%; animation-delay: 0.7s; }
+  .wave-bar:nth-child(9)  { height: 45%; animation-delay: 0.8s; }
+  .wave-bar:nth-child(10) { height: 70%; animation-delay: 0.9s; }
+  .wave-bar:nth-child(11) { height: 90%; animation-delay: 1.0s; }
+  .wave-bar:nth-child(12) { height: 78%; animation-delay: 1.1s; }
+  .wave-bar:nth-child(13) { height: 50%; animation-delay: 1.2s; }
+  .wave-bar:nth-child(14) { height: 28%; animation-delay: 1.3s; }
+  .wave-bar:nth-child(15) { height: 12%; animation-delay: 1.4s; }
+
+  @keyframes wave {
+    0%, 100% { transform: scaleY(0.35); opacity: 0.25; }
+    50% { transform: scaleY(1); opacity: 0.9; }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+  .stats {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid rgba(201,168,76,0.12);
+    border-bottom: 1px solid rgba(201,168,76,0.12);
+  }
+  .stat {
+    padding: 48px 40px;
+    border-right: 1px solid rgba(201,168,76,0.12);
+    text-align: center;
+  }
+  .stat:last-child { border-right: none; }
+  .stat-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 56px; font-weight: 300; color: var(--dorado);
+    line-height: 1; margin-bottom: 10px;
+  }
+  .stat-label {
+    font-size: 11px; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--gris); line-height: 1.5;
+  }
+
+  .services { padding: 120px 60px; }
+  .how { padding: 120px 60px; background: var(--gris-oscuro); overflow: hidden; position: relative; }
+  .team { padding: 120px 60px; }
+  .cta-sec { padding: 120px 60px; background: var(--gris-oscuro); text-align: center; overflow: hidden; position: relative; }
+
+  .section-header {
+    display: flex; justify-content: space-between;
+    align-items: flex-end; margin-bottom: 72px;
+  }
+  .section-eyebrow {
+    font-size: 11px; letter-spacing: 0.45em; text-transform: uppercase;
+    color: var(--dorado); margin-bottom: 18px;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .section-eyebrow::before {
+    content: ''; display: inline-block; width: 32px; height: 1px;
+    background: var(--dorado); opacity: 0.5;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(34px, 3.8vw, 54px); font-weight: 300; line-height: 1.1;
+  }
+  .section-title em { font-style: italic; color: var(--dorado); }
+  .section-desc { max-width: 300px; color: var(--gris); font-size: 14px; line-height: 1.85; text-align: right; }
+
+  .services-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1px; background: rgba(201,168,76,0.1);
+  }
+  .service-card {
+    background: var(--negro); padding: 52px 44px;
+    position: relative; overflow: hidden; transition: background 0.4s;
+  }
+  .service-card::after {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--dorado), transparent);
+    transform: scaleX(0); transition: transform 0.4s;
+  }
+  .service-card:hover { background: #111110; }
+  .service-card:hover::after { transform: scaleX(1); }
+  .service-number {
+    font-family: 'Cormorant Garamond', serif; font-size: 12px;
+    color: var(--dorado-oscuro); letter-spacing: 0.4em; margin-bottom: 36px; opacity: 0.8;
+  }
+  .service-icon { font-size: 28px; margin-bottom: 20px; display: block; }
+  .service-name {
+    font-family: 'Cormorant Garamond', serif; font-size: 26px;
+    font-weight: 400; margin-bottom: 14px; line-height: 1.2;
+  }
+  .service-desc { font-size: 13px; line-height: 1.85; color: var(--gris); margin-bottom: 36px; }
+  .service-features { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+  .service-features li {
+    font-size: 12px; letter-spacing: 0.08em; color: #666660;
+    padding-left: 18px; position: relative; transition: color 0.3s;
+  }
+  .service-card:hover .service-features li { color: var(--gris); }
+  .service-features li::before { content: '—'; position: absolute; left: 0; color: var(--dorado); opacity: 0.6; }
+
+  .how::before {
+    content: 'ORQUESTA';
+    position: absolute; font-family: 'Cormorant Garamond', serif;
+    font-size: 220px; font-weight: 600; color: rgba(201,168,76,0.025);
+    right: -30px; top: 50%; transform: translateY(-50%);
+    letter-spacing: 0.05em; pointer-events: none; white-space: nowrap;
+  }
+  .steps {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 40px; position: relative;
+  }
+  .steps::before {
+    content: ''; position: absolute; top: 27px; left: 12%; right: 12%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(201,168,76,0.4), transparent);
+  }
+  .step { text-align: center; }
+  .step-dot {
+    width: 54px; height: 54px;
+    border: 1px solid rgba(201,168,76,0.5); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 28px;
+    font-family: 'Cormorant Garamond', serif; font-size: 18px;
+    color: var(--dorado); background: var(--gris-oscuro);
+    position: relative; z-index: 1; transition: all 0.3s;
+  }
+  .step:hover .step-dot { background: var(--dorado); color: var(--negro); border-color: var(--dorado); }
+  .step-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; margin-bottom: 12px; }
+  .step-desc { font-size: 13px; color: var(--gris); line-height: 1.75; }
+
+  .team-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1px; background: rgba(201,168,76,0.1);
+  }
+  .team-card {
+    background: var(--negro); padding: 56px 40px;
+    text-align: center; transition: background 0.3s;
+    position: relative; overflow: hidden;
+  }
+  .team-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--dorado), transparent);
+    transform: scaleX(0); transition: transform 0.4s;
+  }
+  .team-card:hover { background: #0f0f0d; }
+  .team-card:hover::before { transform: scaleX(1); }
+  .team-avatar {
+    width: 88px; height: 88px; border-radius: 50%;
+    margin: 0 auto 24px;
+    background: linear-gradient(135deg, #1a1510, #2a2010);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif; font-size: 24px;
+    color: var(--dorado); font-weight: 400;
+    border: 1px solid rgba(201,168,76,0.25);
+    letter-spacing: 0.05em; transition: border-color 0.3s;
+  }
+  .team-card:hover .team-avatar { border-color: rgba(201,168,76,0.6); }
+  .team-name {
+    font-family: 'Cormorant Garamond', serif; font-size: 26px;
+    font-weight: 400; margin-bottom: 6px;
+  }
+  .team-role {
+    font-size: 10px; letter-spacing: 0.35em; text-transform: uppercase;
+    color: var(--dorado); margin-bottom: 20px; opacity: 0.8;
+  }
+  .team-divider { width: 32px; height: 1px; background: rgba(201,168,76,0.3); margin: 0 auto 20px; }
+  .team-bio { font-size: 13px; color: var(--gris); line-height: 1.8; }
+
+  .cta-sec::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse 70% 80% at 50% 50%, rgba(201,168,76,0.07) 0%, transparent 70%);
+  }
+  .cta-eyebrow {
+    font-size: 11px; letter-spacing: 0.45em; text-transform: uppercase;
+    color: var(--dorado); margin-bottom: 32px; position: relative; opacity: 0.8;
+  }
+  .cta-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(38px, 4.5vw, 68px); font-weight: 300;
+    line-height: 1.1; margin-bottom: 24px; position: relative;
+  }
+  .cta-title em { font-style: italic; color: var(--dorado); }
+  .cta-sub { font-size: 15px; color: var(--gris); margin-bottom: 56px; position: relative; }
+  .cta-actions { display: flex; gap: 24px; justify-content: center; position: relative; }
+  .cta-detail {
+    margin-top: 48px; font-size: 12px; color: #444440;
+    letter-spacing: 0.15em; text-transform: uppercase; position: relative;
+  }
+
+  footer {
+    padding: 48px 60px; border-top: 1px solid rgba(201,168,76,0.1);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-left { display: flex; flex-direction: column; gap: 8px; }
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif; font-size: 18px;
+    letter-spacing: 0.35em; color: var(--dorado); text-transform: uppercase;
+  }
+  .footer-tagline { font-size: 11px; color: #444440; letter-spacing: 0.2em; text-transform: uppercase; }
+  .footer-links { display: flex; gap: 32px; list-style: none; }
+  .footer-links a {
+    font-size: 11px; color: #444440; text-decoration: none;
+    letter-spacing: 0.15em; text-transform: uppercase; transition: color 0.3s;
+  }
+  .footer-links a:hover { color: var(--dorado); }
+  .footer-copy { font-size: 11px; color: #333330; letter-spacing: 0.1em; }
+
+  .reveal {
+    opacity: 0; transform: translateY(28px);
+    transition: opacity 0.9s ease, transform 0.9s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 900px) {
+    nav { padding: 18px 24px; }
+    .nav-links { display: none; }
+    .hero { padding: 100px 24px 60px; }
+    .wave-container { display: none; }
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .stat { border-bottom: 1px solid rgba(201,168,76,0.12); }
+    .stat:nth-child(2), .stat:nth-child(4) { border-right: none; }
+    .services, .how, .team, .cta-sec { padding: 80px 24px; }
+    .section-header { flex-direction: column; gap: 20px; }
+    .section-desc { text-align: left; max-width: 100%; }
+    .services-grid, .team-grid { grid-template-columns: 1fr; }
+    .steps { grid-template-columns: repeat(2, 1fr); }
+    .steps::before { display: none; }
+    footer { flex-direction: column; gap: 24px; text-align: center; }
+    .footer-links { justify-content: center; }
+  }
+</style>
 </head>
 <body>
-    <header>
-        <h1>🎯 ORQUESTA</h1>
-        <p class="subtitle">Automatiza tu captura de leads</p>
-        <p style="font-size: 1.1rem; margin-bottom: 30px;">Tu asistente inteligente que trabaja 24/7</p>
-        <a href="#contact" class="cta-button">¡Empezar Ahora!</a>
-    </header>
-    
-    <section>
-        <h2>Servicios</h2>
-        <div class="services">
-            <div class="service-card">
-                <h3>📱 Telegram Bot</h3>
-                <p>Bot automático que califica leads en tiempo real</p>
-                <p class="price">$150/mes</p>
-            </div>
-            <div class="service-card">
-                <h3>🌐 Formulario Web</h3>
-                <p>Captura leads desde tu sitio web profesional</p>
-                <p class="price">$150/mes</p>
-            </div>
-            <div class="service-card">
-                <h3>📊 CRM Integrado</h3>
-                <p>Sincronización automática con HubSpot</p>
-                <p class="price">Incluido</p>
-            </div>
-        </div>
-    </section>
-    
-    <section style="background-color: #f0ebe0;">
-        <h2>Planes de Suscripción</h2>
-        <div class="pricing-plans">
-            <div class="plan">
-                <h3>Basic</h3>
-                <div class="plan-price">$150</div>
-                <p style="margin-bottom: 30px; color: #999;">por mes</p>
-                <ul>
-                    <li>✓ Telegram Bot</li>
-                    <li>✓ Hasta 50 leads/mes</li>
-                    <li>✓ HubSpot Sync</li>
-                    <li>✓ Dashboard</li>
-                    <li>✓ Email notificaciones</li>
-                </ul>
-                <a href="#contact" class="cta-button">Seleccionar</a>
-            </div>
-            <div class="plan featured">
-                <h3>Pro</h3>
-                <div class="plan-price">$300</div>
-                <p style="margin-bottom: 30px; color: #999;">por mes</p>
-                <ul>
-                    <li>✓ Todo lo de Basic</li>
-                    <li>✓ Hasta 200 leads/mes</li>
-                    <li>✓ WhatsApp Bot</li>
-                    <li>✓ Análisis mejorado</li>
-                    <li>✓ Reportes semanales</li>
-                </ul>
-                <a href="#contact" class="cta-button">Seleccionar</a>
-            </div>
-            <div class="plan">
-                <h3>Full</h3>
-                <div class="plan-price">$500</div>
-                <p style="margin-bottom: 30px; color: #999;">por mes</p>
-                <ul>
-                    <li>✓ Todo lo de Pro</li>
-                    <li>✓ Leads ilimitados</li>
-                    <li>✓ Integraciones custom</li>
-                    <li>✓ Soporte 24/7</li>
-                    <li>✓ Personalización total</li>
-                </ul>
-                <a href="#contact" class="cta-button">Seleccionar</a>
-            </div>
-        </div>
-    </section>
-    
-    <section id="contact">
-        <h2>Contacto</h2>
-        <div style="text-align: center; max-width: 600px; margin: 0 auto;">
-            <p style="font-size: 1.2rem; margin-bottom: 30px;">
-                ¿Listo para automatizar tu captura de leads?
-            </p>
-            <p style="font-size: 1.1rem; margin-bottom: 20px;">
-                📧 <strong>Email:</strong> hola@orquesta.ai
-            </p>
-            <p style="font-size: 1.1rem; margin-bottom: 20px;">
-                📱 <strong>WhatsApp:</strong> +44 7537 166676
-            </p>
-            <p style="font-size: 1.1rem;">
-                🌐 <strong>Web:</strong> orquesta-ai.com
-            </p>
-        </div>
-    </section>
-    
-    <footer>
-        <p>&copy; 2026 Orquesta AI. Todos los derechos reservados.</p>
-        <p style="margin-top: 10px; font-size: 0.9rem;">Automatizamos tu captura de leads</p>
-    </footer>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<nav>
+  <div class="logo-wrap">
+    <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="18" cy="18" r="17" stroke="#c9a84c" stroke-width="0.8" opacity="0.4"/>
+      <line x1="8"  y1="18" x2="8"  y2="23" stroke="#c9a84c" stroke-width="2" stroke-linecap="round"/>
+      <line x1="12" y1="12" x2="12" y2="24" stroke="#c9a84c" stroke-width="2" stroke-linecap="round"/>
+      <line x1="16" y1="9"  x2="16" y2="27" stroke="#c9a84c" stroke-width="2" stroke-linecap="round"/>
+      <line x1="20" y1="11" x2="20" y2="25" stroke="#c9a84c" stroke-width="2" stroke-linecap="round"/>
+      <line x1="24" y1="14" x2="24" y2="22" stroke="#c9a84c" stroke-width="2" stroke-linecap="round"/>
+      <line x1="28" y1="16" x2="28" y2="20" stroke="#c9a84c" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+    <span class="logo-text">Orquesta</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#metodo">Método</a></li>
+    <li><a href="#equipo">Equipo</a></li>
+    <li><a href="#contacto" class="nav-cta">Comenzar</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Agencia de Agentes IA — Argentina & España</p>
+    <h1 class="hero-title">Tus procesos,<br>en <em>armonía</em></h1>
+    <p class="hero-subtitle">Automatizamos las operaciones de tu negocio con agentes de inteligencia artificial. Más ventas, menos tiempo perdido, decisiones basadas en datos reales.</p>
+    <div class="hero-actions">
+      <a href="#contacto" class="btn-primary">Comenzar ahora</a>
+      <a href="#servicios" class="btn-secondary">Ver servicios</a>
+    </div>
+  </div>
+  <div class="wave-container">
+    <div class="wave-bars">
+      <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+      <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+      <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+      <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+      <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+    </div>
+  </div>
+</section>
+
+<div class="stats reveal">
+  <div class="stat"><div class="stat-number">80%</div><div class="stat-label">Reducción en tiempos de respuesta</div></div>
+  <div class="stat"><div class="stat-number">3×</div><div class="stat-label">Más leads calificados</div></div>
+  <div class="stat"><div class="stat-number">48h</div><div class="stat-label">De diagnóstico a implementación</div></div>
+  <div class="stat"><div class="stat-number">100%</div><div class="stat-label">Procesos medibles y auditables</div></div>
+</div>
+
+<section class="services" id="servicios">
+  <div class="section-header reveal">
+    <div>
+      <p class="section-eyebrow">Nuestros servicios</p>
+      <h3 class="section-title">Cada agente,<br>un <em>instrumento</em></h3>
+    </div>
+    <p class="section-desc">Combinamos los agentes correctos para que tu negocio funcione como una orquesta bien dirigida. Sin improvisación.</p>
+  </div>
+  <div class="services-grid reveal">
+    <div class="service-card">
+      <div class="service-number">01 — Automatización</div>
+      <span class="service-icon">💬</span>
+      <h4 class="service-name">WhatsApp & CRM Automatizado</h4>
+      <p class="service-desc">Tu agente responde, califica y registra cada cliente en tiempo real. Vos solo aparecés cuando hay una oportunidad concreta.</p>
+      <ul class="service-features">
+        <li>Atención automática 24/7 por WhatsApp</li>
+        <li>Calificación inteligente de leads</li>
+        <li>Integración con HubSpot o Pipedrive</li>
+        <li>Seguimiento y alertas automatizadas</li>
+        <li>Reportes de conversión mensuales</li>
+      </ul>
+    </div>
+    <div class="service-card">
+      <div class="service-number">02 — E-commerce</div>
+      <span class="service-icon">📊</span>
+      <h4 class="service-name">Consultoría E-commerce con IA</h4>
+      <p class="service-desc">Tenés datos pero no podés leerlos. Los convertimos en decisiones concretas que mueven tu negocio hacia adelante.</p>
+      <ul class="service-features">
+        <li>Auditoría de píxeles y tracking</li>
+        <li>Análisis de funnel y abandono</li>
+        <li>Campañas Meta & Google optimizadas</li>
+        <li>Scraping y detección de oportunidades</li>
+        <li>Reportes automáticos con insights IA</li>
+      </ul>
+    </div>
+    <div class="service-card">
+      <div class="service-number">03 — Research</div>
+      <span class="service-icon">🎯</span>
+      <h4 class="service-name">Investigación de Mercado</h4>
+      <p class="service-desc">Encuestas representativas con ponderación estadística e insights estratégicos. Decisiones basadas en evidencia real.</p>
+      <ul class="service-features">
+        <li>Diseño muestral por unidad geográfica</li>
+        <li>Ponderación sociodemográfica (INDEC)</li>
+        <li>Análisis estadístico avanzado</li>
+        <li>Segmentación por variables clave</li>
+        <li>Presentación ejecutiva con recomendaciones</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="how" id="metodo">
+  <div class="section-header reveal">
+    <div>
+      <p class="section-eyebrow">Nuestro método</p>
+      <h3 class="section-title">Del caos a la<br><em>armonía</em> en 4 pasos</h3>
+    </div>
+    <p class="section-desc">Un proceso probado que convierte tus operaciones manuales en sistemas que trabajan solos, sin fricción.</p>
+  </div>
+  <div class="steps reveal">
+    <div class="step">
+      <div class="step-dot">I</div>
+      <h4 class="step-title">Diagnóstico</h4>
+      <p class="step-desc">Analizamos tus procesos e identificamos los puntos de mayor dolor y oportunidad de automatización.</p>
+    </div>
+    <div class="step">
+      <div class="step-dot">II</div>
+      <h4 class="step-title">Diseño</h4>
+      <p class="step-desc">Diseñamos la orquesta de agentes específica para tu negocio y tus objetivos concretos de crecimiento.</p>
+    </div>
+    <div class="step">
+      <div class="step-dot">III</div>
+      <h4 class="step-title">Implementación</h4>
+      <p class="step-desc">Desplegamos e integramos los agentes con tus canales y sistemas existentes en menos de 48 horas.</p>
+    </div>
+    <div class="step">
+      <div class="step-dot">IV</div>
+      <h4 class="step-title">Medición</h4>
+      <p class="step-desc">Monitoreamos los resultados y afinamos continuamente para maximizar el impacto en tu negocio.</p>
+    </div>
+  </div>
+</section>
+
+<section class="team" id="equipo">
+  <div class="section-header reveal">
+    <div>
+      <p class="section-eyebrow">Los directores</p>
+      <h3 class="section-title">Las personas<br>detrás de la <em>batuta</em></h3>
+    </div>
+    <p class="section-desc">Tres fundadores con experiencia real en tecnología, negocios y estrategia de crecimiento.</p>
+  </div>
+  <div class="team-grid reveal">
+    <div class="team-card">
+      <div class="team-avatar">IC</div>
+      <h4 class="team-name">Ignacio Carrere</h4>
+      <p class="team-role">Co-Founder & CEO</p>
+      <div class="team-divider"></div>
+      <p class="team-bio">Experto en gestión operacional y automatización de procesos en entornos de alta complejidad. Lidera la visión estratégica de ORQUESTA y la relación con clientes clave.</p>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar">JA</div>
+      <h4 class="team-name">Juan Adaro</h4>
+      <p class="team-role">Co-Founder & CTO</p>
+      <div class="team-divider"></div>
+      <p class="team-bio">Arquitecto de sistemas de inteligencia artificial y automatización. Diseña e implementa la infraestructura de agentes que hace posible cada solución de ORQUESTA.</p>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar">TY</div>
+      <h4 class="team-name">Tomás Yuste</h4>
+      <p class="team-role">Co-Founder & CGO</p>
+      <div class="team-divider"></div>
+      <p class="team-bio">Especialista en estrategia de crecimiento, marketing digital y desarrollo comercial. Conecta las soluciones de ORQUESTA con las empresas que más las necesitan.</p>
+    </div>
+  </div>
+</section>
+
+<section class="cta-sec" id="contacto">
+  <p class="cta-eyebrow">Primera consulta sin costo</p>
+  <h2 class="cta-title">¿Listo para que tu negocio<br>suene como una <em>orquesta</em>?</h2>
+  <p class="cta-sub">Diagnóstico en 48 horas. Sin compromisos.</p>
+  <div class="cta-actions">
+    <a href="mailto:hola@orquesta.ai" class="btn-primary">hola@orquesta.ai</a>
+    <a href="https://wa.me/5491100000000" class="btn-secondary">WhatsApp directo</a>
+  </div>
+  <p class="cta-detail">Argentina & España · orquesta.ai</p>
+</section>
+
+<footer>
+  <div class="footer-left">
+    <div class="footer-logo">Orquesta</div>
+    <div class="footer-tagline">Tus procesos, en armonía</div>
+  </div>
+  <ul class="footer-links">
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#metodo">Método</a></li>
+    <li><a href="#equipo">Equipo</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <div class="footer-copy">© 2026 ORQUESTA · orquesta.ai</div>
+</footer>
+
+<script>
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
+  document.addEventListener('mousemove', e => {
+    mouseX = e.clientX; mouseY = e.clientY;
+    cursor.style.left = mouseX - 4 + 'px';
+    cursor.style.top = mouseY - 4 + 'px';
+  });
+  function animateRing() {
+    ringX += (mouseX - ringX) * 0.1;
+    ringY += (mouseY - ringY) * 0.1;
+    ring.style.left = ringX - 16 + 'px';
+    ring.style.top = ringY - 16 + 'px';
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+  document.querySelectorAll('a, button, .service-card, .team-card, .step').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.style.transform = 'scale(2.5)';
+      ring.style.transform = 'scale(1.6)';
+      ring.style.borderColor = 'rgba(201,168,76,0.8)';
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.style.transform = 'scale(1)';
+      ring.style.transform = 'scale(1)';
+      ring.style.borderColor = 'rgba(201,168,76,0.4)';
+    });
+  });
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
 </body>
 </html>
